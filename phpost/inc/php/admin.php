@@ -3,7 +3,7 @@
  * Controlador
  *
  * @name    admin.php
- * @author  PHPost Team
+ * @author  PHPost Team & Hussein Alcon Gutierrez
 */
 
 /**********************************\
@@ -62,9 +62,10 @@
 	
 	if($action == ''){
 		$smarty->assign("tsAdmins",$tsAdmin->getAdmins());
-        $smarty->assign("tsInst",$tsAdmin->getInst());
+                $smarty->assign("tsInst",$tsAdmin->getInst());
 	} elseif($action == 'creditos'){
 		$smarty->assign("tsVersion",$tsAdmin->getVersions());
+                $tsVersion=$tsAdmin->getVersions();
 	} elseif($action == 'configs'){
 		// GUARDAR CONFIGURACION
 		if(!empty($_POST['titulo'])) {
@@ -383,6 +384,7 @@
 \*********************************/
 	// ACCION?
 	$smarty->assign("tsAction",$action);
+        $tsAction=$action;
 	//
 	$smarty->assign("tsAct",$act);
 	//
