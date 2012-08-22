@@ -10,8 +10,7 @@
                                     <h4>Principal</h4>
                                     <ul class="cat-list">
                                         <li id="a_main">
-                                            <span class="cat-title">
-                                                <a href="<? echo $tsConfig['url']; ?>/moderacion/">Centro de Moderaci&oacute;n</a></span>
+                                            <span class="cat-title"><a href="<? echo $tsConfig['url']; ?>/moderacion/">Centro de Moderaci&oacute;n</a></span>
                                         </li>
                                     </ul>
                                     <h4>Denuncias</h4>
