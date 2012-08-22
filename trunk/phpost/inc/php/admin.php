@@ -87,13 +87,20 @@
 		// VER TEMAS
 		if(empty($act)){
 			$smarty->assign("tsTemas",$tsAdmin->getTemas());
+                        $tsTemas=$tsAdmin->getTemas();
 		// EDITAR TEMA
 		} elseif($act == 'editar'){
 			// GUARDAR
-			if(!empty($_POST['save'])){
+			if(!empty($_POST['save']))
+                        {
 				if($tsAdmin->saveTema()) $tsCore->redirectTo($tsCore->settings['url'].'/admin/temas?save=true');
 			// MOSTRAR
-			} else	$smarty->assign("tsTema",$tsAdmin->getTema());
+			} 
+                        else
+                        {
+                            $smarty->assign("tsTema",$tsAdmin->getTema());
+                            $tsTema=$tsAdmin->getTema();
+                        }    
 		// CAMBIAR TEMA
 		} elseif($act == 'usar'){
 			// GUARDAR

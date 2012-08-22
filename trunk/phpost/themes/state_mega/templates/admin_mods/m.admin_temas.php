@@ -3,7 +3,7 @@
                                 </div>
                                 <div id="res" class="boxy-content">
                                 {if $tsSave}
-                                <div style="display: block;" class="mensajes ok">Tus cambios han sido guardados.</div>
+                                    <div style="display: block;" class="mensajes ok">Tus cambios han sido guardados.</div>
                                 {/if}
                                     {if $tsAct == ''}
                                 	<table cellpadding="0" cellspacing="0" border="0" width="500" align="center" class="admin_table">
@@ -28,21 +28,34 @@
                                                 <td class="admin_actions">
                                                 	<a href="?act=editar&tid=<? echo $tema['tid']; ?>">
                                                             <img src="<? echo $tsConfig['url']; ?>/themes/default/images/icons/editar.png" title="Editar este tema"/></a>
-                                                {if $tsConfig.tema_id == $tema.tid}
+                                                <?
+                                                if ($tsConfig['tema_id'] == $tema['tid'])
+                                                {        
+                                                ?>         
                                                 	<a onclick="return false;">
                                                             <img src="<? echo $tsConfig['url']; ?>/themes/default/images/icons/yes.png" title="Este tema est&aacute; en uso" /></a>
-                                                {else}
+                                                <?
+                                                }
+                                                else
+                                                {    
+                                                ?>   
                                                 	<a href="?act=usar&tid=<? echo $tema['tid']; ?>&tt=<? echo $tema['t_name']; ?>">
                                                             <img src="<? echo $tsConfig['url']; ?>/themes/default/images/icons/theme.png" title="Usar este tema" /></a>
-                                                    {if $tema.tid != 1}
-                                                    <a href="?act=borrar&tid=<? echo $tema['tid']; ?>&tt=<? echo $tema['t_name']; ?>">
-                                                        <img src="<? echo $tsConfig['url']; ?>/themes/default/images/icons/close.png" title="Borrar este tema" /></a>
-                                                    {/if}
-                                                {/if}
+                                                        <?                                                    
+                                                        if ($tema['tid'] != 1)
+                                                        {
+                                                        ?>
+                                                        <a href="?act=borrar&tid=<? echo $tema['tid']; ?>&tt=<? echo $tema['t_name']; ?>">
+                                                            <img src="<? echo $tsConfig['url']; ?>/themes/default/images/icons/close.png" title="Borrar este tema" /></a>
+                                                        <?
+                                                        }
+                                                        
+                                                 }
+                                                ?>
                                                 </td>
                                                 </tr>
                                             <?                                            
-                                            }
+                                            } // end foreach themes
                                             ?>
                                         </tbody>
                                     </table>
