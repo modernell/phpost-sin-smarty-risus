@@ -1,11 +1,18 @@
                                 <div class="boxy-title">
                                     <h3>Administrar Temas</h3>
                                 </div>
-                                <div id="res" class="boxy-content">
-                                {if $tsSave}
+                                <div id="res" class="boxy-content">                                
+                                <?    
+                                if ($tsSave)
+                                {
+                                ?>
                                     <div style="display: block;" class="mensajes ok">Tus cambios han sido guardados.</div>
-                                {/if}
-                                    {if $tsAct == ''}
+                                <?    
+                                }                                
+                                
+                                    if ($tsAct == '')
+                                    {
+                                    ?>
                                 	<table cellpadding="0" cellspacing="0" border="0" width="500" align="center" class="admin_table">
                                     	<thead>
                                             <th>Vista previa</th>
@@ -61,7 +68,11 @@
                                     </table>
                                     <hr />
                                     <input type="button"  onclick="location.href = '<? echo $tsConfig[url]; ?>/admin/temas?act=nuevo'"value="Instalar nuevo tema" class="mBtn btnOk" style="margin-left:280px;">
-                                    {elseif $tsAct == 'editar'}
+                                    <?
+                                    }
+                                    elseif ($tsAct == 'editar')
+                                    {    
+                                    ?>    
                                     <form action="" method="post" id="admin_form" autocomplete="off">
                                     	<label for="ai_name">Nombre del tema:</label>
                                         <input type="text" id="ai_name" name="name" value="<? echo $tsTema['t_name']; ?>" size="30" disabled="disabled"/> 
@@ -75,19 +86,36 @@
                                         <label>&nbsp;</label>
                                         <input type="submit" value="Guardar tema" name="save" class="mBtn btnOk">
                                     </form>
-                                    {elseif $tsAct == 'usar' || $tsAct == 'borrar'}
+                                    <?
+                                    }
+                                    elseif ($tsAct == 'usar' || $tsAct == 'borrar')
+                                    {    
+                                    ?>    
                                     <form action="" method="post" id="admin_form" autocomplete="off">
-                                    	<h3 align="center">{$tt}</h3>
+                                    	<h3 align="center"><? echo $tt;  ?></h3>
                                     	<label>&nbsp;</label>
                                         <input type="submit" name="confirm" value="<? if ($tsAct == 'usar') { echo 'Confirmar el cambio de'; } else { echo 'Continuar borrando este'; } ?> tema &raquo;" class="mBtn btnOk">
-                                        {if $tsAct == 'borrar'}
+                                        <? if ($tsAct == 'borrar')
+                                        {
+                                        ?>
                                         <p align="center">Te recordamos que debes borrar la carpeta del theme manualmente en el servidor.</p>
-                                        {/if}
+                                        <?                                        
+                                        }
+                                        ?>
                                     </form>
-                                    {elseif $tsAct == 'nuevo'}
-                                    {if $tsError}
-                                        <div style="display: block;" class="mensajes error"><? echo $tsError; ?></div>
-                                    {/if}
+                                    <?
+                                    }
+                                    elseif ($tsAct == 'nuevo')
+                                    {
+                                    ?>    
+                                            <?                                            
+                                            if ($tsError)
+                                            {
+                                            ?>    
+                                                <div style="display: block;" class="mensajes error"><? echo $tsError; ?></div>
+                                            <?                                            
+                                            }
+                                            ?>
                                     <form action="" method="post" id="admin_form" autocomplete="off">
                                     	<label for="ai_path">Nombre de la carpeta donde esta el tema a instalar:<br />
                                             <i><? echo $tsConfig['url']; ?>/themes/</i></label>
@@ -96,5 +124,7 @@
                                         <label>&nbsp;</label>
                                         <input type="submit" value="Instalar tema" class="mBtn btnOk">
                                     </form>
-                                    {/if}
+                                    <?            
+                                    }
+                                    ?>
                                 </div>
