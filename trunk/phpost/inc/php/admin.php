@@ -83,7 +83,9 @@
         }  elseif($act == 'borrar'){
           if($tsAdmin->delNoticia()) $tsCore->redirectTo($tsCore->settings['url'].'/admin/news?borrar=true');
 		}
-	} elseif($action == 'temas'){
+	} 
+        elseif($action == 'temas')
+        {
 		// VER TEMAS
 		if(empty($act)){
 			$smarty->assign("tsTemas",$tsAdmin->getTemas());
@@ -109,22 +111,31 @@
 			}
 			// TITULO
 			$smarty->assign("tt",$_GET['tt']);
-		} elseif($act == 'borrar'){
+                        $tt=$_GET['tt'];
+		} 
+                elseif($act == 'borrar')
+                {
 			// GUARDAR
 			if(!empty($_POST['confirm'])) {
 				if($tsAdmin->deleteTema()) $tsCore->redirectTo($tsCore->settings['url'].'/admin/temas?save=true');
 			}
 			// TITULO
 			$smarty->assign("tt",$_GET['tt']);
-		} elseif($act == 'nuevo'){
+                        $tt=$_GET['tt'];
+		} 
+                elseif($act == 'nuevo')
+                {
 			// GUARDAR
-			if(!empty($_POST['path'])) {
+			if(!empty($_POST['path']))
+                        {
 				$install = $tsAdmin->newTema();
 				if($install == 1) $tsCore->redirectTo($tsCore->settings['url'].'/admin/temas?save=true');
 				else $smarty->assign("tsError",$install);
+                                $tsError=$install;
 			}
 		}
-	} elseif($action == 'ads'){
+	} // end themes
+        elseif($action == 'ads'){
 		if(!empty($_POST['save'])){
 			if($tsAdmin->saveAds()) $tsCore->redirectTo($tsCore->settings['url'].'/admin/ads?save=true');
 		}
@@ -394,6 +405,7 @@
         $tsAction=$action;
 	//
 	$smarty->assign("tsAct",$act);
+        $tsAct=$act;
 	//
 	}
 
@@ -402,6 +414,7 @@ if(empty($tsAjax)) {	// SI LA PETICION SE HIZO POR AJAX DETENER EL SCRIPT Y NO M
 	$smarty->assign("tsTitle",$tsTitle);	// AGREGAR EL TITULO DE LA PAGINA ACTUAL
 	
 	$smarty->assign("tsSave",$_GET['save']);	// AGREGAR EL TITULO DE LA PAGINA ACTUAL
+        $tsSave=$_GET['save'];
 	
 	/*++++++++ = ++++++++*/
 	include("../../footer.php");
