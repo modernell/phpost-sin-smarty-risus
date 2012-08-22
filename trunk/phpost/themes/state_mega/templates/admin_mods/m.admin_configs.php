@@ -51,7 +51,8 @@
                                         </dl>
 										<dl>
                                             <dt><label for="ai_xat">Xat ID:</label><br />
-                                            <span>Por defecto puedes agregar un chat de <a href="http://xat.com">Xat</a>
+                                            <span>Por defecto puedes agregar un chat de 
+                                                <a href="http://xat.com">Xat</a>
                                                 para tu web, solo crea tu grupo he ingresa el nombre.
                                             </span></dt>
                                             <dd><input type="text" id="ai_xat" name="xat" maxlength="20" value="<? echo $tsConfig['xat_id']; ?>" /> </dd>
@@ -85,12 +86,12 @@
                                         <dl>
                                             <dt><label for="ai_active">Usuario online:</label><br />
                                             <span>Tiempo que debe trascurrir para considerar que un usuario est&aacute; en linea.</span></dt>
-                                            <dd><input type="text" id="ai_active" name="active" style="width:10%" maxlength="2" value="{$tsConfig.c_last_active}" /> min.</dd>
+                                            <dd><input type="text" id="ai_active" name="active" style="width:10%" maxlength="2" value="<? echo $tsConfig['c_last_active']; ?>" /> min.</dd>
                                         </dl>
                                         <dl>
                                             <dt><label for="ai_stats_cache">Estad&iacute;sticas en buffer:</label><br />
                                             <span>Tiempo que debe trascurrir para actualizar las estad&iacute;sticas del sitio.</span></dt>
-                                            <dd><input type="text" id="ai_stats_cache" name="stats_cache" style="width:10%" maxlength="2" value="{$tsConfig.c_stats_cache}" /> min.</dd>
+                                            <dd><input type="text" id="ai_stats_cache" name="stats_cache" style="width:10%" maxlength="2" value="<? echo $tsConfig['c_stats_cache']; ?>" /> min.</dd>
                                         </dl>
                                         <dl>
                                             <dt><label for="ai_sess_ip">Login por IP:</label><br />
@@ -244,23 +245,24 @@
                                             <dd><input type="text" id="ai_max_com" name="max_com" style="width:10%" maxlength="3" value="<? echo $tsConfig['c_max_com']; ?>" /></dd>
                                         </dl>
 					<dl>
-                                            <dt><label for="ai_allow_points" class="qtip" title="Si introducimos '0', se permitir&aacute; dar los puntos definidos por el rango del usuario. <br /> <br />  Si introducimos '-1', se podr&aacute;n dar todos los puntos que el usuario tenga para dar hoy. <br /> <br /> Introduciendo un n&uacute;mero superior a 0, todos los usuarios sin importar su rango, tend&aacute;n esa cantidad para dar." >Puntos por post:</label><br />
+                                            <dt><label for="ai_allow_points" class="qtip" title="Si introducimos '0', se permitir&aacute; dar los puntos definidos por el rango del usuario. <br /> <br />  Si introducimos '-1', se podr&aacute;n dar todos los puntos que el usuario tenga para dar hoy. <br /> <br /> Introduciendo un n&uacute;mero superior a 0, todos los usuarios sin importar su rango, tend&aacute;n esa cantidad para dar." >
+                                                Puntos por post:</label><br />
                                             <span>N&uacute;mero m&aacute;ximo de puntos que permitimos dar en los posts. </span></dt>
                                             <dd><input type="text" id="ai_allow_points" name="allow_points" style="width:10%" maxlength="3" value="<? echo $tsConfig['c_allow_points']; ?>" /></dd>
                                         </dl>
                                         <dl>
                                             <dt><label for="ai_sum_p">Los votos suman puntos:</label><br /><span>Cada voto positivo en un comentario es un punto m&aacute;s para el usuario. <strong>Nota:</strong> Los votos negativos no restan puntos</span></dt>
                                             <dd>
-                                                <label><input name="sump" type="radio" id="ai_sum_p" value="1" {if $tsConfig.c_allow_sump == 1}checked="checked"{/if} class="radio"/>Si</label>
-                                                <label><input name="sump" type="radio" id="ai_sum_p" value="0" {if $tsConfig.c_allow_sump != 1}checked="checked"{/if} class="radio"/>No</label>
+                                                <label><input name="sump" type="radio" id="ai_sum_p" value="1" <? if ($tsConfig['c_allow_sump'] == 1) echo 'checked="checked"'; ?> class="radio"/>Si</label>
+                                                <label><input name="sump" type="radio" id="ai_sum_p" value="0" <? if ($tsConfig['c_allow_sump'] != 1) echo 'checked="checked"'; ?> class="radio"/>No</label>
                                             </dd>
                                         </dl>
                                         <hr />
                                         <dl>
                                             <dt><label for="ai_nfu">Cambio de rango:</label><br /><span>Un usuario sube de rango cuando obtiene los puntos m&iacute;nimos en:</span></dt>
                                             <dd>
-                                                <label><input name="newr" type="radio" id="ai_nfu" value="1" {if $tsConfig.c_newr_type == 1}checked="checked"{/if} class="radio"/>Todos sus post</label>
-                                                <label><input name="newr" type="radio" id="ai_nfu" value="0" {if $tsConfig.c_newr_type != 1}checked="checked"{/if} class="radio"/>Solo en un post</label>
+                                                <label><input name="newr" type="radio" id="ai_nfu" value="1" <? if ($tsConfig['c_newr_type'] == 1)echo 'checked="checked"'; ?> class="radio"/>Todos sus post</label>
+                                                <label><input name="newr" type="radio" id="ai_nfu" value="0" <? if ($tsConfig['c_newr_type'] != 1) echo 'checked="checked"'; ?> class="radio"/>Solo en un post</label>
                                             </dd>
                                         </dl>
                                         <p><input type="submit" name="save" value="Guardar Cambios" class="btn_g"/></p>
