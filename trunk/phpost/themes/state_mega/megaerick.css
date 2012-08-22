@@ -1,0 +1,73 @@
+.current-user div.navitem.username img {
+float: left;
+margin-right: 5px;
+display: block;
+}
+.current-user div.navitem.username a,.current-user div.navitem.username a:hover {
+color: #FFF!important;
+}
+.my-account-links {
+position: absolute;
+z-index: 100;
+top: auto;
+width: 100px;
+right: auto;
+text-align: left;
+display: none;
+*overflow:hidden;
+}
+.my-account-links a {
+color: #fff;
+padding: 4px 8px;
+text-align: left;
+display: block;
+float: left;
+width: 90px;
+background: #000;
+*height:18px;
+*overflow:hidden;
+}
+.my-account-links a:hover {
+color: #f2f2f2;
+background: #757575;
+}
+.current-user div i {
+margin: 0;
+}
+.my-account-links a {
+}
+
+		.info2{
+		margin-top:-20px;
+		padding-top:4px;
+		background:#FAFAFA;
+		border-top:1px dotted #3C7EB7;
+		border-left:1px dotted #3C7EB7;
+		border-right:1px dotted #3C7EB7;
+		}
+		
+		.info3{
+		padding-top:4px;
+		background:#FAFAFA;
+		border-bottom:1px dotted #3C7EB7;
+		border-left:1px dotted #3C7EB7;
+		border-right:1px dotted #3C7EB7;
+		}
+		
+		#cboxTitle {
+background: url(images/bg-menu-blue-vintage.png) left bottom repeat-x;
+position: absolute;
+top: 0px;
+left: 0;
+text-align: left;
+width: 100%;
+color: white;
+line-height: 22px;
+height: 20px;
+padding: 8px 0 8px 0;
+text-indent: 20px;
+font-size: 14px;
+font-weight: bold;
+-moz-border-radius-topleft: 3px;
+-moz-border-radius-topright: 3px;
+}
