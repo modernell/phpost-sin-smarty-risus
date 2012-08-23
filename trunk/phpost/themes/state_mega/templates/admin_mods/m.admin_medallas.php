@@ -81,10 +81,10 @@
 										</thead>
 										<tbody>
 										{foreach from=$tsAsignaciones.asignaciones item=m}
-											<tr id="assign_id_{$m.id}">
+											<tr id="assign_id_<? echo $m['id']; ?>">
 												<td>{$m.id}</td>
 												<td><img src="<? echo $tsConfig['default'];?>/images/icons/med/{$m.m_image}_16.png" class="qtip" title="{$m.m_title}"/></td>
-												<td>{if $m.m_type == 1}Usuario{elseif $m.m_type == 2}Post{else}Foto{/if}</td>
+												<td><? if ($m['m_type'] == 1) echo 'Usuario'; elseif ($m['m_type'] == 2) echo 'Post'; else echo 'Foto'; ?></td>
 												<td>{if $m.m_type == 1}
                                                                                                     <a href="<? echo $tsConfig['url']; ?>/perfil/{$m.user_name}" class="hovercard" uid="{$m.user_id}">@{$m.user_name}</a>{elseif $m.m_type == 2}
                                                                                                     <a href="<? echo $tsConfig['url']; ?>/posts/{$m.c_seo}/{$m.post_id}/{$m.post_title|seo}.html" target="_blank">{$m.post_title}</a>
@@ -102,7 +102,7 @@
 										{/foreach}
 										</tbody>
 										<tfoot>
-										<td colspan="7">P&aacute;ginas: {$tsAsignaciones.pages}</td>
+										<td colspan="7">P&aacute;ginas: <? echo $tsAsignaciones['pages']; ?></td>
 										</tfoot>
 									</table>
 									{elseif $tsAct == 'nueva' || $tsAct == 'editar'}
@@ -153,7 +153,7 @@
 										</dt>
 										<dd>						
 												<input type="text" id="ai_cant" name="med_cant" style="width:7%" maxlength="5" value="<? echo $tsMed['m_cant'] ?>" <? if ($tsMed['m_cond_user'] == 9) echo 'style="display:none;"'; ?> />
-												<select name="med_cond_user" id="ai_cond_user" style="width:125px;{if $tsMed.m_type != 1}display:none;{/if}" onchange="if($('#ai_cond_user').val() == 9) $('#ai_cond_user_rango').slideDown();  else  $('#ai_cond_user_rango').slideUp();">
+												<select name="med_cond_user" id="ai_cond_user" style="width:125px;<? if ($tsMed['m_type'] != 1) echo 'display:none;'; ?>" onchange="if($('#ai_cond_user').val() == 9) $('#ai_cond_user_rango').slideDown();  else  $('#ai_cond_user_rango').slideUp();">
 													<option value="1"<? if ($tsMed['m_cond_user'] == 1) echo 'selected'; ?>>Puntos</option>
 													<option value="2"<? if ($tsMed['m_cond_user'] == 2) echo 'selected'; ?>>Seguidores</option>
 													<option value="3"<? if ($tsMed['m_cond_user'] == 3) echo 'selected'; ?>>Siguiendo</option>
