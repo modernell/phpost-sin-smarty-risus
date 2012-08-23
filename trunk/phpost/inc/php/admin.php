@@ -72,18 +72,35 @@
 			if($tsAdmin->saveConfig()) $tsCore->redirectTo($tsCore->settings['url'].'/admin/configs?save=true');
 		}
     /** NOTICIAS **/
-    } elseif($action == 'news'){
-        if(empty($act)) $smarty->assign("tsNews",$tsAdmin->getNoticias());
-        elseif($act == 'nuevo' && !empty($_POST['not_body'])){
+    } 
+    elseif($action == 'news')
+    {
+        if(empty($act)) 
+        {
+            $smarty->assign("tsNews",$tsAdmin->getNoticias());
+            $tsNews=$tsAdmin->getNoticias();
+        }    
+        elseif($act == 'nuevo' && !empty($_POST['not_body']))
+        {
             if($tsAdmin->newNoticia()) $tsCore->redirectTo($tsCore->settings['url'].'/admin/news?save=true');
-        } elseif($act == 'editar'){
-            if(!empty($_POST['not_body'])){
+        } 
+        elseif($act == 'editar')
+        {
+            if(!empty($_POST['not_body']))
+            {
                 if($tsAdmin->editNoticia()) $tsCore->redirectTo($tsCore->settings['url'].'/admin/news?save=true');
-            } else $smarty->assign("tsNew",$tsAdmin->getNoticia());
-        }  elseif($act == 'borrar'){
-          if($tsAdmin->delNoticia()) $tsCore->redirectTo($tsCore->settings['url'].'/admin/news?borrar=true');
-		}
-	} 
+            } 
+            else
+            {
+                $smarty->assign("tsNew",$tsAdmin->getNoticia());
+                $tsNew=$tsAdmin->getNoticia();
+            }                
+        }  
+        elseif($act == 'borrar')
+        {
+               if($tsAdmin->delNoticia()) $tsCore->redirectTo($tsCore->settings['url'].'/admin/news?borrar=true');
+        }
+    } // end News
         elseif($action == 'temas')
         {
 		// VER TEMAS
