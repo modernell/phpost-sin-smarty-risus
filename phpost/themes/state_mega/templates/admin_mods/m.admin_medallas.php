@@ -69,7 +69,7 @@
 												<a onclick="admin.medallas.asignar(<? echo $m['medal_id']; ?>); return false">
                                                                                                     <img src="<? echo $tsConfig['default'];?>/images/icons/plus.png" title="Asignar Medalla"/>
                                                                                                 </a>
-												<a href="<? echo $tsConfig['url']; ?>/admin/medals/editar/{$m.medal_id}">
+												<a href="<? echo $tsConfig['url']; ?>/admin/medals/editar/<? echo $m['medal_id']; ?>">
                                                                                                     <img src="<? echo $tsConfig['default'];?>/images/icons/editar.png" title="Editar Medalla"/>
                                                                                                 </a>
 												<a onclick="admin.medallas.borrar(<? echo $m['medal_id']; ?>); return false">
@@ -112,7 +112,7 @@
 											<tr id="assign_id_<? echo $m['id']; ?>">
 												<td><? echo $m['id'] ?></td>
 												<td>
-                                                                                                    <img src="<? echo $tsConfig['default'];?>/images/icons/med/{$m.m_image}_16.png" class="qtip" title="<? echo $m['m_title']; ?>"/>
+                                                                                                    <img src="<? echo $tsConfig['default'];?>/images/icons/med/<? echo $m['m_image']; ?>_16.png" class="qtip" title="<? echo $m['m_title']; ?>"/>
                                                                                                     
                                                                                                 </td>
 												<td><? if ($m['m_type'] == 1) echo 'Usuario'; elseif ($m['m_type'] == 2) echo 'Post'; else echo 'Foto'; ?></td>
@@ -138,7 +138,7 @@
                                                                                                     }
                                                                                                     ?>
                                                                                                 </td>
-												<td>$m.m_date|hace:true}</td>{*date_format:"%d/%m/%Y"*}
+                                                                                                <td><? echo modifier_hace($m['m_date']);?>hace:true}</td>{*date_format:"%d/%m/%Y"*}
 												<td><? echo $m['medal_ip']; ?></td>
 												<td class="admin_actions">
 												<a onclick="admin.medallas.borrar_asignacion(<? echo $m['id']; ?>, <? echo $m['medal_id']; ?>); return false">
