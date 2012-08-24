@@ -15,12 +15,19 @@
                                                 <div class="mensajes error"><? echo $tsError; ?></div>
                                                 <?                                                
                                                 }
-                                                ?>
-                                    {if !$tsAct}
-                                    {if !$tsMedals.medallas}
-                                    <div class="phpostAlfa">No hay medallas.</div>
-                                    <input type="button"  onclick="location.href = '<? echo $tsConfig[url]; ?>/admin/medals?act=nueva'" value="Agregar nueva medalla" class="mBtn btnOk"/>
-                                    {else}
+                                                
+                                    if (!$tsAct)
+                                    {
+                                            if (!$tsMedals['medallas'])
+                                            {
+                                            ?>
+                                            <div class="phpostAlfa">No hay medallas.</div>
+                                            <input type="button"  onclick="location.href = '<? echo $tsConfig[url]; ?>/admin/medals?act=nueva'" value="Agregar nueva medalla" class="mBtn btnOk"/>
+                                            <?
+                                            }
+                                            else
+                                            {
+                                            ?>    
 									<table cellpadding="0" cellspacing="0" border="0" class="admin_table" width="550" align="center">
 										<thead>
 											<th>ID</th>
@@ -80,8 +87,12 @@
 									</table><hr />
 									<input type="button"  onclick="location.href = '<? echo $tsConfig['url']; ?>/admin/medals?act=nueva'" value="Agregar nueva medalla" class="mBtn btnOk" style="margin-left:200px;"/>
 									<input type="button"  onclick="location.href = '<? echo $tsConfig['url']; ?>/admin/medals?act=showassign'" value="Ver medallas asignadas" class="mBtn btnOk" />
-                                    {/if}
-									{elseif $tsAct == 'showassign'}
+                                              <?
+                                              }
+                                              }
+                                              elseif ($tsAct == 'showassign')
+                                              {
+                                              ?>
 									<table cellpadding="0" cellspacing="0" border="0" class="admin_table" width="550" align="center">
 										<thead>
 											<th>ID</th>
@@ -101,7 +112,8 @@
 											<tr id="assign_id_<? echo $m['id']; ?>">
 												<td><? echo $m['id'] ?></td>
 												<td>
-                                                                                                    <img src="<? echo $tsConfig['default'];?>/images/icons/med/{$m.m_image}_16.png" class="qtip" title="{$m.m_title}"/>
+                                                                                                    <img src="<? echo $tsConfig['default'];?>/images/icons/med/{$m.m_image}_16.png" class="qtip" title="<? echo $m['m_title']; ?>"/>
+                                                                                                    
                                                                                                 </td>
 												<td><? if ($m['m_type'] == 1) echo 'Usuario'; elseif ($m['m_type'] == 2) echo 'Post'; else echo 'Foto'; ?></td>
 												<td>
@@ -142,7 +154,11 @@
 										<td colspan="7">P&aacute;ginas: <? echo $tsAsignaciones['pages']; ?></td>
 										</tfoot>
 									</table>
-									{elseif $tsAct == 'nueva' || $tsAct == 'editar'}
+                                                                        <?
+                                                                        }
+									elseif ($tsAct == 'nueva' || $tsAct == 'editar')
+                                                                        {    
+                                                                        ?>    
 									<script type="text/javascript">
 										// {literal}
 										$(function(){
@@ -159,7 +175,7 @@
 											<legend><? if ($tsAct == 'nueva') echo 'Nueva'; else echo 'Editar'; ?> medalla</legend>
 											<dl>
 												<dt><label for="med_name">T&iacute;tulo de la medalla:</label></dt>
-												<dd><input type="text" id="med_name" name="med_title" value="{$tsMed.m_title}" /></dd>
+												<dd><input type="text" id="med_name" name="med_title" value="<? echo $tsMed['m_title']; ?>" /></dd>
 											</dl>
 											<dl>
 												<dt>
@@ -172,11 +188,16 @@
                                                                                         <dl>
 												<dt><label for="cat_img">Icono de la categor&iacute;a:</label></dt>
 												<dd>
-													<img src="<? echo $tsConfig['images'];?>/space.gif" style="background:url(<? echo $tsConfig['default'];?>/images/icons/med/{if $tsMed.m_image}{$tsMed.m_image}{else}{$tsIcons.0}{/if}_16.png) no-repeat left center;" width="16" height="16" id="c_icon"/>
+													<img src="<? echo $tsConfig['images'];?>/space.gif" style="background:url(<? echo $tsConfig['default'];?>/images/icons/med/<? if ($tsMed['m_image']) echo $tsMed['m_image']; else echo $tsIcons[0];?>_16.png) no-repeat left center;" width="16" height="16" id="c_icon"/>
 													<select name="med_img" id="med_img" style="width:164px">
-													{foreach from=$tsIcons key=i item=img}
-														<option value="{$img}" style="padding:2px 20px 0; background:#FFF url(<? echo $tsConfig['url']; ?>/themes/default/images/icons/med/{$img}_16.png) no-repeat left center;" {if $tsMed.m_image == $img}selected="selected"{/if}>{$img}</option>
-													{/foreach}
+													<?
+                                                                                                         foreach ($tsIcons as $key=>$img)
+                                                                                                         { 
+                                                                                                         ?>   
+														<option value="<? echo $img;?>" style="padding:2px 20px 0; background:#FFF url(<? echo $tsConfig['url']; ?>/themes/default/images/icons/med/<? echo $img; ?>_16.png) no-repeat left center;" <? if ($tsMed['m_image'] == $img) echo 'selected="selected"' ?>><? echo $img; ?></option>
+													<?
+                                                                                                         }
+                                                                                                         ?>
 													</select>
 												</dd>
 											</dl>
@@ -232,8 +253,8 @@
 													<option value="5"<? if ($tsMed['m_cond_foto'] == 5) echo 'selected'; ?>>Medallas</option>
 												</select>
 										</dd>
-									</dl>	
-											<hr />
+                                                                                </dl>	
+										<hr />
 										 <?
                                                                                  if ($tsAct == 'nueva')
                                                                                  {
@@ -252,5 +273,7 @@
                                                                                  ?>
 										</fieldset>
 										</form>
-									{/if}
+									<?                                                                        
+                                                                        }
+                                                                        ?>
 								</div>
