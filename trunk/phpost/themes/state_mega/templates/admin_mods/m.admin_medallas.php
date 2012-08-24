@@ -12,14 +12,14 @@
 						if ($tsError)
                                                 {
                                                 ?>
-                                                <div class="mensajes error">{$tsError}</div>
+                                                <div class="mensajes error"><? echo $tsError; ?></div>
                                                 <?                                                
                                                 }
                                                 ?>
                                     {if !$tsAct}
                                     {if !$tsMedals.medallas}
                                     <div class="phpostAlfa">No hay medallas.</div>
-                                    <input type="button"  onclick="location.href = '<? echo $tsConfig['url']; ?>/admin/medals?act=nueva'" value="Agregar nueva medalla" class="mBtn btnOk"/>
+                                    <input type="button"  onclick="location.href = '<? echo $tsConfig[url]; ?>/admin/medals?act=nueva'" value="Agregar nueva medalla" class="mBtn btnOk"/>
                                     {else}
 									<table cellpadding="0" cellspacing="0" border="0" class="admin_table" width="550" align="center">
 										<thead>
@@ -34,19 +34,30 @@
 											<th>Acciones</th>
 										</thead>
 										<tbody>
-										{foreach from=$tsMedals.medallas item=m}
+                                                                                <?    
+										foreach ($tsMedals['medallas'] as $m)
+                                                                                {
+                                                                                ?>
 											<tr id="medal_id_<? echo $m['medal_id']; ?>">
-												<td>{$m.medal_id}</td>
-												<td><img src="<? echo $tsConfig['default'];?>/images/icons/med/{$m.m_image}_16.png" /></td>
-												<td>{if $m.m_type == 1}Usuario{elseif $m.m_type == 2}Post{else}Foto{/if}</td>
-												<td>{$m.m_title}</td>
-												<td>{$m.m_description}</td>
-												<td>{if $m.m_autor == 0}Sistema{else}
-                                                                                                    <a href="<? echo $tsConfig['url']; ?>/perfil/{$m.user_name}" class="hovercard" uid="{$m.user_id}">{$m.user_name}</a>
-                                                                                                    {/if}
+												<td><? echo $m['medal_id']; ?></td>
+												<td><img src="<? echo $tsConfig['default'];?>/images/icons/med/<? echo $m['m_image']; ?>_16.png" /></td>
+												<td><? if ($m['m_type'] == 1) echo 'Usuario'; elseif($m['m_type'] == 2)echo 'Post'; else echo 'Foto'; ?></td>
+												<td><? echo $m['m_title']; ?></td>
+												<td><? echo $m['m_description']; ?></td>
+												<td>
+                                                                                                    <?
+                                                                                                    if ($m['m_autor'] == 0)
+                                                                                                        echo 'Sistema';
+                                                                                                    else
+                                                                                                    {
+                                                                                                    ?>
+                                                                                                        <a href="<? echo $tsConfig['url']; ?>/perfil/<? echo $m['user_name'];?>" class="hovercard" uid="<? echo $m['user_id'];?>"><? echo $m['user_name'];?></a>
+                                                                                                    <?
+                                                                                                    }
+                                                                                                    ?>
                                                                                                 </td>
-												<td>{$m.m_date|date_format:"%d/%m/%Y"}</td>
-												<td id="total_med_assig_{$m.medal_id}">{$m.m_total}</td>
+                                                                                                <td><? echo modifier_hace($m['m_date']);?>date_format:"%d/%m/%Y"} fix this</td>
+												<td id="total_med_assig_<? echo $m['medal_id']; ?>"><? echo $m['m_total']; ?></td>
 												<td class="admin_actions">
 												<a onclick="admin.medallas.asignar(<? echo $m['medal_id']; ?>); return false">
                                                                                                     <img src="<? echo $tsConfig['default'];?>/images/icons/plus.png" title="Asignar Medalla"/>
@@ -59,10 +70,12 @@
                                                                                                 </a>
 												</td>
 											</tr>
-										{/foreach}
+										<?
+                                                                                }
+                                                                                ?>
 										</tbody>
 										<tfoot>
-										<td colspan="9">P&aacute;ginas: {$tsMedals.pages}</td>
+										<td colspan="9">P&aacute;ginas: <? echo $tsMedals['pages']; ?></td>
 										</tfoot>
 									</table><hr />
 									<input type="button"  onclick="location.href = '<? echo $tsConfig['url']; ?>/admin/medals?act=nueva'" value="Agregar nueva medalla" class="mBtn btnOk" style="margin-left:200px;"/>
@@ -80,26 +93,50 @@
 											<th>Acciones</th>
 										</thead>
 										<tbody>
-										{foreach from=$tsAsignaciones.asignaciones item=m}
+                                                                                <?
+                                                                                
+										foreach ($tsAsignaciones['asignaciones'] as $m)
+                                                                                {
+                                                                                ?>
 											<tr id="assign_id_<? echo $m['id']; ?>">
-												<td>{$m.id}</td>
-												<td><img src="<? echo $tsConfig['default'];?>/images/icons/med/{$m.m_image}_16.png" class="qtip" title="{$m.m_title}"/></td>
-												<td><? if ($m['m_type'] == 1) echo 'Usuario'; elseif ($m['m_type'] == 2) echo 'Post'; else echo 'Foto'; ?></td>
-												<td>{if $m.m_type == 1}
-                                                                                                    <a href="<? echo $tsConfig['url']; ?>/perfil/{$m.user_name}" class="hovercard" uid="{$m.user_id}">@{$m.user_name}</a>{elseif $m.m_type == 2}
-                                                                                                    <a href="<? echo $tsConfig['url']; ?>/posts/{$m.c_seo}/{$m.post_id}/{$m.post_title|seo}.html" target="_blank">{$m.post_title}</a>
-                                                                                                    {else}
-                                                                                                    <a href="<? echo $tsConfig['url']; ?>/fotos/autor/{$m.foto_id}/{$m.f_title}.html" target="_blank">{$m.f_title}</a>{/if}
+												<td><? echo $m['id'] ?></td>
+												<td>
+                                                                                                    <img src="<? echo $tsConfig['default'];?>/images/icons/med/{$m.m_image}_16.png" class="qtip" title="{$m.m_title}"/>
                                                                                                 </td>
-												<td>{$m.m_date|hace:true}</td>{*date_format:"%d/%m/%Y"*}
-												<td>{$m.medal_ip}</td>
+												<td><? if ($m['m_type'] == 1) echo 'Usuario'; elseif ($m['m_type'] == 2) echo 'Post'; else echo 'Foto'; ?></td>
+												<td>
+                                                                                                    <?
+                                                                                                    if ($m['m_type'] == 1)
+                                                                                                    {
+                                                                                                    ?>
+                                                                                                    <a href="<? echo $tsConfig['url']; ?>/perfil/<? echo $m['user_name']; ?>" class="hovercard" uid="<? echo $m['user_id']; ?>">@<? echo $m['user_name']; ?></a>
+                                                                                                    <?
+                                                                                                    }                                                                                                    
+                                                                                                    elseif ($m['m_type'] == 2)
+                                                                                                    {
+                                                                                                    ?>                                                                                                         
+                                                                                                    <a href="<? echo $tsConfig['url']; ?>/posts/<? echo $m['c_seo'].'/'.$m['post_id'].'/'.string_seo($m['post_title']);?>.html" target="_blank"><? echo $m['post_title']; ?></a>
+                                                                                                    <?
+                                                                                                    }
+                                                                                                    else
+                                                                                                    {    
+                                                                                                    ?>
+                                                                                                    <a href="<? echo $tsConfig['url']; ?>/fotos/autor/<? echo $m['foto_id'].'/'.$m['f_title'];?>.html" target="_blank"><? echo $m['f_title']; ?></a>
+                                                                                                    <?                                                                                                    
+                                                                                                    }
+                                                                                                    ?>
+                                                                                                </td>
+												<td>$m.m_date|hace:true}</td>{*date_format:"%d/%m/%Y"*}
+												<td><? echo $m['medal_ip']; ?></td>
 												<td class="admin_actions">
 												<a onclick="admin.medallas.borrar_asignacion(<? echo $m['id']; ?>, <? echo $m['medal_id']; ?>); return false">
                                                                                                     <img src="<? echo $tsConfig['default'];?>/images/icons/close.png" title="Borrar Asignaci&oacute;n" />
                                                                                                 </a>
 												</td>
 											</tr>
-										{/foreach}
+										<?
+                                                                                }
+                                                                                ?>
 										</tbody>
 										<tfoot>
 										<td colspan="7">P&aacute;ginas: <? echo $tsAsignaciones['pages']; ?></td>
@@ -119,17 +156,20 @@
 									</script>
 										<form action="" method="post" autocomplete="off">
 										<fieldset>
-											<legend>{if $tsAct == 'nueva'}Nueva{else}Editar{/if} medalla</legend>
+											<legend><? if ($tsAct == 'nueva') echo 'Nueva'; else echo 'Editar'; ?> medalla</legend>
 											<dl>
 												<dt><label for="med_name">T&iacute;tulo de la medalla:</label></dt>
 												<dd><input type="text" id="med_name" name="med_title" value="{$tsMed.m_title}" /></dd>
 											</dl>
 											<dl>
-												<dt><label for="ai_desc">Descripci&oacute;n:</label><br />
+												<dt>
+                                                                                                <label for="ai_desc">Descripci&oacute;n:</label><br />
                                                                                                 <span>Describe el motivo por el cual el contenido gana esta medalla.</span></dt>
-												<dd><textarea name="med_desc" id="ai_desc" rows="3" cols="40">{$tsMed.m_description}</textarea></dd>
+												<dd>
+                                                                                                    <textarea name="med_desc" id="ai_desc" rows="3" cols="40"><? echo $tsMed['m_description']; ?></textarea>
+                                                                                                </dd>
 											</dl>
-                                            <dl>
+                                                                                        <dl>
 												<dt><label for="cat_img">Icono de la categor&iacute;a:</label></dt>
 												<dd>
 													<img src="<? echo $tsConfig['images'];?>/space.gif" style="background:url(<? echo $tsConfig['default'];?>/images/icons/med/{if $tsMed.m_image}{$tsMed.m_image}{else}{$tsIcons.0}{/if}_16.png) no-repeat left center;" width="16" height="16" id="c_icon"/>
