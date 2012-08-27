@@ -174,8 +174,10 @@
 		 }
 	//FOTOS
 	} elseif($action == 'fotos'){
-		 if(!$act) {
+		 if(!$act)
+                 {
 		 $smarty->assign("tsAdminFotos",$tsAdmin->GetAdminFotos());
+                 $tsAdminFotos=$tsAdmin->GetAdminFotos();
 		 }
 	// ESTADÍSTICAS
 	} 
@@ -396,8 +398,11 @@
 			} else 
                         {
 				$smarty->assign("tsType",$_GET['t']);
+                                $tsType=$_GET['t'];
 				$smarty->assign("tsCID",$_GET['cid']);
+                                $tsCID=$_GET['cid'];
 				$smarty->assign("tsIcons",$tsAdmin->getExtraIcons());
+                                $tsIcons=$tsAdmin->getExtraIcons();
 			}
 		} elseif($act == 'change'){
 			if($_POST['save']){
