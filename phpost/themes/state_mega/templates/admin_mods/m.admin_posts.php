@@ -2,10 +2,18 @@
 								<h3>Administrar Posts</h3>
 								</div>
 								<div id="res" class="boxy-content" style="position:relative">
-								{if $tsAct == ''}
-								{if !$tsAdminPosts.data}
+                                                                <?    
+								if ($tsAct == '')
+                                                                {    
+								if (!$tsAdminPosts['data'])
+                                                                {
+                                                                ?>
 								<div class="phpostAlfa">No hay posts.</div>
-								{else}
+                                                                <?
+                                                                }
+								else
+                                                                {    
+                                                                ?>    
 								<table cellpadding="0" cellspacing="0" border="0" class="admin_table" width="100%" align="center">
 									<thead>
 										<th>ID</th>
@@ -24,41 +32,80 @@
                                                                                 </th>
 									</thead>
 									<tbody>
-										{foreach from=$tsAdminPosts.data item=p}
-										<tr id="post_{$p.post_id}">
-											<td>{$p.post_id}</td>
+										<?                                                                                
+                                                                                foreach  ($tsAdminPosts['data'] as $p)
+                                                                                {
+                                                                                ?>
+										<tr id="post_<? echo $p['post_id']; ?>">
+											<td><? echo $p['post_id']; ?></td>
 											<td>
-                                                                                            <a href="<? echo $tsConfig['url']; ?>/posts/{$p.c_seo}/{$p.post_id}/{$p.post_title|seo}.html" target="_blank">{$p.post_title|truncate:30}</a></td>
+                                                                                            <a href="<? echo $tsConfig['url']; ?>/posts/<? echo $p['c_seo'].'/'.$p['post_id'].'/'.string_seo($p['post_title']);?>.html" target="_blank"><? echo string_truncate($p['post_title'],30); ?></a></td>
 											<td>
-                                                                                            <a href="<? echo $tsConfig['url']; ?>/perfil/{$p.user_name}" class="hovercard" uid="{$p.user_id}">{$p.user_name}</a></td>
-											<td>{$p.post_date|hace:true}</td>
-											<td id="status_post_{$p.post_id}">{if $p.post_status == 3}
-                                                                                            <font color="grey">Oculto</font>{elseif $p.post_status == 2}
-                                                                                            <font color="red">Eliminado</font>{elseif $p.post_status == 1}
-                                                                                            <font color="purple">En revisi&oacute;n</font>{else}
-                                                                                            <font color="green">Activo</font>{/if}</td>
+                                                                                            <a href="<? echo $tsConfig['url']; ?>/perfil/<? echo $p['user_name']; ?>" class="hovercard" uid="<? echo $p['user_id']; ?>"><? echo $p['user_name']; ?></a></td>
+                                                                                        <td><? echo modifier_hace($p['post_date'],true); ?></td>
+											<td id="status_post_<? echo $p['post_id']; ?>">
+                                                                                            <?
+                                                                                            if ($p['post_status'] == 3)
+                                                                                            {
+                                                                                            ?>
+                                                                                            <font color="grey">Oculto</font>
+                                                                                            <?
+                                                                                            }
+                                                                                            elseif($p['post_status'] == 2)
+                                                                                            {
+                                                                                            ?>
+                                                                                            <font color="red">Eliminado</font>
+                                                                                            <?
+                                                                                            }
+                                                                                            elseif ($p['post_status'] == 1)
+                                                                                            {
+                                                                                            ?>        
+                                                                                            <font color="purple">En revisi&oacute;n</font>
+                                                                                            <?
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                            ?>
+                                                                                            <font color="green">Activo</font>
+                                                                                            <?
+                                                                                            }                                                                                            
+                                                                                            ?>
+                                                                                        </td>
    										    <td id="moreinfo1_2">
-                                                                                        <a href="<? echo $tsConfig['url']; ?>/moderacion/buscador/1/1/{$p.post_ip}" class="geoip" target="_blank">{$p.post_ip}</a>
+                                                                                        <a href="<? echo $tsConfig['url']; ?>/moderacion/buscador/1/1/<? echo $p['post_id']; ?>" class="geoip" target="_blank"><? echo $p['post_id']; ?></a>
                                                                                     </td>
 											<td class="admin_actions">
-												<a href="<? echo $tsConfig['url']; ?>/posts/editar/{$p.post_id}">
+												<a href="<? echo $tsConfig['url']; ?>/posts/editar/<? echo $p['post_id']; ?>">
                                                                                                     <img src="<? echo $tsConfig['default']; ?>/images/icons/editar.png" title="Editar Post" /></a>
-												{if $p.post_status == 2}
-													<a href="#" onclick="admin.posts.borrar({$p.post_id}); return false">
+                                                                                                <?
+												if ($p['post_status'] == 2)
+                                                                                                {
+                                                                                                ?>
+													<a href="#" onclick="admin.posts.borrar(<? echo $p['post_id']; ?>); return false">
                                                                                                             <img src="<? echo $tsConfig['default']; ?>/images/icons/close.png" title="Borrar Post permanentemente" />
                                                                                                         </a>
-												{else}
-													<a href="#" onclick="mod.posts.borrar({$p.post_id}, 'posts', null); return false;">
+                                                                                                <?
+                                                                                                }
+												else
+                                                                                                {    
+                                                                                                ?>    
+													<a href="#" onclick="mod.posts.borrar(<? echo $p['post_id']; ?>, 'posts', null); return false;">
                                                                                                             <img src="<? echo $tsConfig['default']; ?>/images/icons/close.png" title="Borrar Post" /></a>
-												{/if}
+                                                                                               <?
+                                                                                                }
+                                                                                               ?>
 											</td>
 										</tr>
-										{/foreach}
+                                                                                <?
+										}                                                                                
+                                                                                ?>
 									</tbody>
 									<tfoot>
-										<td colspan="7">P&aacute;ginas: {$tsAdminPosts.pages}</td>
+										<td colspan="7">P&aacute;ginas: <? echo $tsAdminPosts['pages']; ?></td>
 									</tfoot>
 								</table>
-								{/if}
-								{/if}
+                                                                <?
+                                                                }
+                                                                }
+                                                                ?>
                                 </div>
