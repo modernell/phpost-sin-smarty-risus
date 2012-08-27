@@ -2,10 +2,18 @@
 								   <h3>Administrar Fotos</h3>
 								</div>
 								<div id="res" class="boxy-content" style="position:relative">
-								{if $tsAct == ''}
-								{if !$tsAdminFotos.data}
+                                                               <?     
+								if ($tsAct == '')
+                                                                {    
+								if (!$tsAdminFotos['data'])
+                                                                {
+                                                                ?>    
 								<div class="phpostAlfa">No hay fotos.</div>
-								{else}
+                                                                <?
+                                                                }
+								else
+                                                                {    
+                                                                ?>    
 								<table cellpadding="0" cellspacing="0" border="0" class="admin_table" width="100%" align="center">
 									<thead>
 										<th>ID</th>
@@ -51,9 +59,27 @@
                                                                                         ?>
                                                                                     </td>
 											<td id="status_foto_<? echo $f['foto_id']; ?>">
-                                                                                            {if $f.f_status == 1}
+                                                                                           <? 
+                                                                                            if ($f['f_status'] == 1)
+                                                                                            {
+                                                                                            ?>
                                                                                             <font color="purple">Oculta</font>
-                                                                                            {elseif $f.f_status == 0}<font color="green">Visible</font>{else}<font color="red">Eliminada</font>{/if}</td>
+                                                                                            <?
+                                                                                            }
+                                                                                            elseif ($f['f_status'] == 0)
+                                                                                            {
+                                                                                            ?>
+                                                                                            <font color="green">Visible</font>
+                                                                                            <?
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                            ?>    
+                                                                                            <font color="red">Eliminada</font>
+                                                                                            <?                                                                                            
+                                                                                            }
+                                                                                            ?>
+                                                                                        </td>
 											<td class="admin_actions">
                                                                                             <a href="<? echo $tsConfig['url']; ?>/fotos/editar.php?id=<? echo $f['foto_id']; ?>" target="_blank">
                                                                                                <img src="<? echo $tsConfig['default']; ?>/images/icons/editar.png" title="Editar Foto" /></a>
@@ -73,6 +99,8 @@
 										<td colspan="9">P&aacute;ginas: <? echo $tsAdminFotos['pages']; ?></td>
 									</tfoot>
 								</table>
-								{/if}
-								{/if}
+                                                                <?
+								}
+								}
+                                                                ?>
                                 </div>

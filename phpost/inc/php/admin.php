@@ -470,9 +470,11 @@
 			elseif($act == 'setdefault'){
 					if($tsAdmin->SetDefaultRango()) $tsCore->redirectTo($tsCore->settings['url'].'/admin/rangos?save=true');
 			}
+        //*****************USERS*******************       
 	} elseif($action == 'users'){
 	   if(empty($act)){
 	       $smarty->assign("tsMembers",$tsAdmin->getUsuarios());
+               $tsMembers=$tsAdmin->getUsuarios();
 	   }elseif($act == 'show'){
 	       $do = $_GET['t'];
            $user_id = $_GET['uid'];

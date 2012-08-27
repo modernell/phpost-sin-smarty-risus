@@ -42,11 +42,11 @@
                                                     <ul>
                                                         <li class="clearfix">
                                                             <span class="floatL">&nbsp; Fundaci&oacute;n</span>
-                                                            <span class="floatR number" title="{$tsInst.0|fecha}">{$tsInst.0|hace:true} &nbsp;</span>
+                                                            <span class="floatR number" title="<? echo modifier_hace($tsInst[0]); ?>"><? echo modifier_hace($tsInst[0]); ?> &nbsp;</span>
                                                         </li>
                                                         <li class="clearfix">
                                                             <span class="floatL">&nbsp; Actualizado</span>
-                                                            <span class="floatR number" title="{$tsInst.1|fecha}">{$tsInst.1|hace:true} &nbsp;</span>
+                                                            <span class="floatR number" title="<? echo modifier_hace($tsInst[1]); ?>"><? echo modifier_hace($tsInst[1]); ?> &nbsp;</span>
                                                         </li>
                                                     </ul>
                                             </div>                                    
