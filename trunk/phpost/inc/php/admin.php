@@ -187,12 +187,19 @@
 		 $smarty->assign("tsAdminStats",$tsAdmin->GetAdminStats());
                  $tsAdminStats=$tsAdmin->GetAdminStats();
 		
-	// CAMBIOS DE NOMBRE DE USUARIO
-	} elseif($action == 'nicks'){
-		 if(!$act) {
-		 $smarty->assign("tsAdminNicks",$tsAdmin->getChangeNicks());
-		 }elseif($act == 'realizados'){
-		 $smarty->assign("tsAdminNicks",$tsAdmin->getChangeNicks_A());
+	// *************CAMBIOS DE NOMBRE DE USUARIO *********************
+	} 
+        elseif($action == 'nicks')
+        {
+		 if(!$act) 
+                 {
+                    $smarty->assign("tsAdminNicks",$tsAdmin->getChangeNicks());
+                    $tsAdminNicks=$tsAdmin->getChangeNicks();
+		 }
+                 elseif($act == 'realizados')
+                 {
+                    $smarty->assign("tsAdminNicks",$tsAdmin->getChangeNicks_A());
+                    $tsAdminNicks=$tsAdmin->getChangeNicks_A();
 		 }
    // LISTA NEGRA
     } 
@@ -343,6 +350,7 @@
 				$smarty->assign("tsIcons",$tsAdmin->getExtraIcons('med', 16));
 				//RANGOS DISPONIBLES
 				$smarty->assign("tsRangos",$tsAdmin->getAllRangos());
+                                $tsRangos=$tsAdmin->getAllRangos();
                 
         }
 	}// END MEDALS  
@@ -432,10 +440,14 @@
 			$smarty->assign("tsSID",$_GET['sid']);
                         $tsSID=$_GET['sid'];
 		}
-	} elseif($action == 'rangos'){
+	}
+        elseif($action == 'rangos')
+        {
 			// PORTADA
-			if(empty($act)) {
+			if(empty($act))
+                        {
 				$smarty->assign("tsRangos",$tsAdmin->getRangos());
+                                $tsRangos=$tsAdmin->getRangos();
 			// LISTAR USUARIOS DEPENDIENDO EL RANGO
 			} elseif($act == 'list'){
 				$smarty->assign("tsMembers",$tsAdmin->getRangoUsers());
@@ -445,8 +457,11 @@
 					if($tsAdmin->saveRango()) $tsCore->redirectTo($tsCore->settings['url'].'/admin/rangos?save=true');
 				} else {
 					$smarty->assign("tsRango",$tsAdmin->getRango());
+                                        $tsRango=$tsAdmin->getRango();
 					$smarty->assign("tsIcons",$tsAdmin->getExtraIcons('ran'));
-                    $smarty->assign("tsType",$_GET['t']);
+                                        $tsIcons=$tsAdmin->getExtraIcons('ran');
+                                        $smarty->assign("tsType",$_GET['t']);
+                                        $tsType=$_GET['t'];
 				}
 			// NUEVO RANGO
 			} elseif($act == 'nuevo'){
@@ -455,21 +470,31 @@
 					if($save == 1) $tsCore->redirectTo($tsCore->settings['url'].'/admin/rangos?save=true');
 					else {
 						$smarty->assign("tsError",$save); 
+                                                $tsError=$save;
 						$smarty->assign("tsIcons",$tsAdmin->getExtraIcons('ran'));
+                                                $tsIcons=$tsAdmin->getExtraIcons('ran');
 					}
-				} else {
+				} 
+                                else 
+                                {
 					$smarty->assign("tsIcons",$tsAdmin->getExtraIcons('ran'));
-                    $smarty->assign("tsType",$_GET['t']);
+                                        $tsIcons=$tsAdmin->getExtraIcons('ran');                                        
+                                        $smarty->assign("tsType",$_GET['t']);
+                                        $tsType=$_GET['t'];
 				}
-			} elseif($act == 'borrar'){
+			}
+                        elseif($act == 'borrar')
+                        {
 				if(empty($_POST['save'])){
 					$smarty->assign("tsRangos",$tsAdmin->getAllRangos());
+                                        $tsRangos=$tsAdmin->getAllRangos();
 				}else{
 					if($tsAdmin->delRango()) $tsCore->redirectTo($tsCore->settings['url'].'/admin/rangos?save=true');
 				}
 			}
 			// CAMBIAR RANGO PREDETERMINADO DEL REGISTRO
-			elseif($act == 'setdefault'){
+			elseif($act == 'setdefault')
+                        {
 					if($tsAdmin->SetDefaultRango()) $tsCore->redirectTo($tsCore->settings['url'].'/admin/rangos?save=true');
 			}
         //*****************USERS*******************       
