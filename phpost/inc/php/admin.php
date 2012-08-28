@@ -280,9 +280,11 @@
                    }
           }
 	// CONECTADOS A LA COMUNIDAD
-	} elseif($action == 'sesiones'){
+	} elseif($action == 'sesiones')
+            {
 		 if(!$act) {
 		 $smarty->assign("tsAdminSessions",$tsAdmin->GetSessions());
+                 $tsAdminSessions=$tsAdmin->GetSessions();
 		 }
     /** MEDALLAS **/
     }
@@ -487,9 +489,10 @@
         	           if($update == 'OK') $tsCore->redirectTo($tsCore->settings['url'].'/admin/users?act=show&uid='.$user_id.'&save=true');
                        else $smarty->assign("tsError",$update);
                     }
-					include('../ext/datos.php');
+                    include('../ext/datos.php');
                     $smarty->assign("tsPerfil",$tsAdmin->getUserPrivacidad());
-					$smarty->assign("tsPrivacidad",$tsPrivacidad);
+                    $tsPerfil=$tsAdmin->getUserPrivacidad();
+                    $smarty->assign("tsPrivacidad",$tsPrivacidad);
                 break;
                 case 6:
         	       if(!empty($_POST['save'])){
@@ -499,6 +502,7 @@
                     }
 					include('../ext/datos.php');
                     $smarty->assign("tsPerfil",$tsAdmin->getUserPrivacidad());
+                    $tsPerfil=$tsAdmin->getUserPrivacidad();
 					$smarty->assign("tsPrivacidad",$tsPrivacidad);
                 break;
                 case 7:
@@ -508,6 +512,7 @@
                        else $smarty->assign("tsError",$update);
                     }
                     $smarty->assign("tsUserR",$tsAdmin->getUserRango($user_id));
+                    $tsUserR=$tsAdmin->getUserRango($user_id);
                 break;
 				case 8:
         	       if(!empty($_POST['save'])){
@@ -524,12 +529,16 @@
                        else $smarty->assign("tsError",$update);
                     }
     	           $smarty->assign("tsUserD",$tsAdmin->getUserData());
+                   $tsUserD=$tsAdmin->getUserData();
                 break;
            }
            // TIPO
            $smarty->assign("tsType",$_GET['t']);
+           $tsType=$_GET['t'];
            $smarty->assign("tsUserID",$user_id);
+           $tsUserID=$user_id;
            $smarty->assign("tsUsername",$tsUser->getUserName($user_id));
+           $tsUsername=$tsUser->getUserName($user_id);
 	   }
 	}
 

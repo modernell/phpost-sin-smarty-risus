@@ -2,10 +2,18 @@
 								<h3>Administrar Usuarios</h3>
 								</div>
 								<div id="res" class="boxy-content" style="position:relative">
-								{if !$tsAct}
-								{if !$tsMembers.data}
+                                                               <?     
+								if (!$tsAct)
+                                                                {
+								if (!$tsMembers['data'])
+                                                                {
+                                                                ?>
 								<div class="phpostAlfa">No hay usuarios registrados.</div>
-								{else}
+                                                                <?
+                                                                }
+								else
+                                                                {    
+                                                                ?>
 								<table cellpadding="0" cellspacing="0" border="0" class="admin_table" width="100%" align="center">
 									<thead>
 										<th>Rango</th>
@@ -28,7 +36,7 @@
                                                                                             <a href="<? echo $tsConfig['url']; ?>/perfil/<? echo $m['user_name']; ?>" class="hovercard" uid="<? echo $m['user_id']; ?>" style="color:#<? echo $m['r_color']; ?>;"><? echo $m['user_name']; ?></a></td>
 											<td><? echo $m['user_email']; ?></td>
 											<td><? if ($m['user_lastactive'] == 0) echo 'Nunca'; else echo modifier_hace($m['user_lastactive']);?></td>
-											<td>{$m.user_registro|date_format:"%d/%m/%Y"}</td>
+                                                                                        <td><? echo modifier_hace($m['user_registro']);?>date_format:"%d/%m/%Y"}</td>
 											<td><a href="<? echo $tsConfig['url']; ?>/moderacion/buscador/1/1/<? echo $m['user_last_ip']; ?>" class="geoip" target="_blank"><? echo $m['user_last_ip']; ?></a></td>
 											<td id="status_user_<? echo $m['user_id']; ?>">
                                                                                             <?
@@ -46,7 +54,7 @@
                                                                                             }
                                                                                             else
                                                                                             {
-                                                                                            ?>    
+                                                                                            ?>  
                                                                                                 
                                                                                                 <font color="green">Activo</font>
                                                                                             <?                                                                                              
@@ -60,8 +68,8 @@
                                                                                                     <img src="<? echo $tsConfig['default']; ?>/images/reactivar.png" title="Activar/Desactivar Usuario" /></a>
                                                                                                 <a href="#" onclick="mod.users.action(<? echo $m['user_id']; ?>, 'aviso', false); return false;">
                                                                                                     <img src="<? echo $tsConfig['default']; ?>/images/icons/warning.png" title="Enviar Alerta" /></a>
-												<a href="#" onclick="mod.{if $m.user_baneado == 1}reboot({$m.user_id}, 'users', 'unban', false){else}users.action({$m.user_id}, 'ban', false){/if}; return false;">
-                                                                                                    <img src="<? echo $tsConfig['default']; ?>/images/icons/power_{if $m.user_baneado == 1}on{else}off{/if}.png" title="{if $m.user_baneado == 1}Reactivar{else}Suspender{/if} Usuario" />
+												<a href="#" onclick="mod.<? if ($m['user_baneado'] == 1){ ?>reboot(<? echo $m['user_id'];?>, 'users', 'unban', false)<? }else{?> users.action(<? echo $m['user_id'];?>, 'ban', false)<? } ?>; return false;">
+                                                                                                    <img src="<? echo $tsConfig['default']; ?>/images/icons/power_<? if ($m['user_baneado'] == 1) echo 'on'; else echo 'off'; ?>.png" title="<? if ($m['user_baneado'] == 1) echo 'Reactivar'; else echo 'Suspender'; ?> Usuario" />
                                                                                                 </a>
 											</td>
 										</tr>
@@ -73,8 +81,12 @@
 										<td colspan="8">P&aacute;ginas: <? echo $tsMembers['pages']; ?></td>
 									</tfoot>
 								</table>
-								{/if}
-								{elseif $tsAct == 'show'}
+                                                                <?
+                                                                }
+								}
+								elseif ($tsAct == 'show')
+                                                                {
+                                                                ?>    
 								<div class="admin_header">
 								<h1>Administrar: <strong><? echo $tsUsername; ?></strong></h1>
 								<div class="floatR"><strong>Seleccionar:</strong> 
@@ -88,15 +100,31 @@
 								</div>
 								<div class="clearBoth"></div>
 								</div>
-								{if $tsSave}<div class="mensajes ok">Tus cambios han sido guardados.</div>{/if}
-								{if $tsError}<div class="mensajes error">{$tsError}</div>{/if}
+                                                                <?
+								if ($tsSave)
+                                                                {
+                                                                ?>
+                                                                    <div class="mensajes ok">Tus cambios han sido guardados.</div>
+                                                                <?    
+                                                                }
+								if ($tsError)
+                                                                {    
+                                                                ?>    
+                                                                    <div class="mensajes error"><? echo $tsError; ?></div>
+                                                                <?    
+                                                                }
+                                                                ?>
 								<form action="" method="post">
 									<fieldset>
-									{if !$tsType || $tsType == 1}
+                                                                        <?    
+									if (!$tsType || $tsType == 1)
+                                                                        {   
+                                                                        ?>    
 										<legend>Vista general</legend>
 										<dl>
 											<dt><label for="user">Nombre de Usuario:</label></dt>
-											<dd><input type="text" name="nick" id="user" value="{$tsUserD.user_name}" class="qtip" title="El nick s&oacute;lo se cambiar&aacute; si escribe una nueva contrase&ntilde;a" /></dd>
+											<dd>
+                                                                                            <input type="text" name="nick" id="user" value="<? echo $tsUserD['user_name']; ?>" class="qtip" title="El nick s&oacute;lo se cambiar&aacute; si escribe una nueva contrase&ntilde;a" /></dd>
 										</dl>
 										<dl>
 											<dt><label for="user">Rango:</label></dt>
@@ -106,28 +134,28 @@
 										</dl>
 										<dl>
 											<dt><label for="registro">Registrado:</label></dt>
-											<dd><strong>{$tsUserD.user_registro|date_format:"%d/%m/%Y a las %H:%M"}</strong></dd>
+											<dd><strong><? echo ($tsUserD['user_registro']);?>|date_format:"%d/%m/%Y a las %H:%M"</strong></dd>
 										</dl>
 										<dl>
 											<dt><label>&Uacute;ltima vez activo:</label></dt>
-											<dd><strong>{$tsUserD.user_lastactive|hace}</strong></dd>
+                                                                                        <dd><strong><? echo modifier_hace($tsUserD['user_lastactive']);?></strong></dd>
 										</dl>
 										<dl>
 											<dt><label>Puntos:</label></dt>
-											<dd><input type="text" name="points" id="points" value="{$tsUserD.user_puntos}" style="width:10%" /></dd>
+											<dd><input type="text" name="points" id="points" value="<? echo $tsUserD['user_puntos']; ?>" style="width:10%" /></dd>
 										</dl>
 										<dl>
 											<dt><label>Puntos para dar:</label></dt>
-											<dd><input type="text" name="pointsxdar" id="pointsxdar" value="{$tsUserD.user_puntosxdar}" style="width:10%" /></dd>
+											<dd><input type="text" name="pointsxdar" id="pointsxdar" value="<? echo $tsUserD['user_puntosxdar']; ?>" style="width:10%" /></dd>
 										</dl>
 										<dl>
 											<dt><label>Cambios de nick disponibles:</label></dt>
-											<dd><input type="text" name="changenicks" id="changenicks" value="{$tsUserD.user_name_changes}" style="width:10%" /></dd>
+											<dd><input type="text" name="changenicks" id="changenicks" value="<? echo $tsUserD['user_name_changes']; ?>" style="width:10%" /></dd>
 										</dl>
 										<hr />
 										<dl>
 											<dt><label for="email">E-mail:</label></dt>
-											<dd><input type="text" name="email" id="email" value="{$tsUserD.user_email}" /></dd>
+											<dd><input type="text" name="email" id="email" value="<? echo $tsUserD['user_email']; ?>" /></dd>
 										</dl>
 										<dl>
 											<dt><label for="pwd">Nueva contrase&ntilde;a:</label><br /><span>Debe tener entre 5 y 35 caracteres.</span></dt>
@@ -141,7 +169,11 @@
 											<dt><label for="sendata">Informar al usuario</label><br /><span>Marque esta casilla si quiere enviar un e-mail al usuario con los nuevos datos</span></dt>
 											<dd><input type="checkbox" name="sendata"/></dd>
 										</dl>
-									{elseif $tsType == 5}
+                                                                        <?
+                                                                        }
+									elseif ($tsType == 5)
+                                                                        {
+                                                                        ?>
 									<legend>Modificar privacidad del usuario</legend>
 										<h2 class="active">&iquest;Qui&eacute;n puede...</h2>
 									<div class="field">
@@ -149,22 +181,35 @@
 											<dt><label>ver su muro?</label></dt>
 											<dd>
 												<select name="muro" style="width:270px;">
-												{foreach from=$tsPrivacidad item=p key=i}
-												<option value="{$i}"{if $tsPerfil.p_configs.m == $i} selected="true"{/if}>{$p}</option>
-												{/foreach}
+                                                                                                <?    
+												foreach ($tsPrivacidad as $i=>$p)
+                                                                                                {
+                                                                                                ?>    
+												<option value="<? echo $i; ?>"<? if ($tsPerfil['p_configs']['m'] == $i) echo 'selected="true"'; ?>><? echo $p; ?></option>
+                                                                                                <?
+												}
+                                                                                                ?>
 												</select>
 											</dd>
 										</dl>                    				
 									</div>
-									{$tsPerfil.p_configs.muro}
+									<? echo $tsPerfil['p_configs']['muro']; ?>
 									<div class="field">
 										<dl>
 										<dt><label>firmar su muro?</label></dt>
 											<dd>
 												<select name="muro_firm" style="width:270px;">
-												{foreach from=$tsPrivacidad item=p key=i}
-												{if $i != 6}<option value="{$i}"{if $tsPerfil.p_configs.mf == $i}selected{/if}>{$p}</option>{/if}
-												{/foreach}
+                                                                                                <?    
+												foreach ($tsPrivacidad as $i=>$p)
+                                                                                                {                                                                                                
+												if ($i != 6)
+                                                                                                {
+                                                                                                ?>
+                                                                                                    <option value="<? echo $i; ?>"<? if ($tsPerfil['p_configs']['mf'] == $i) echo 'selected'; ?>><? echo $p; ?></option>
+                                                                                                <?
+                                                                                                }
+												}
+                                                                                                ?>
 												</select>
 											</dd>
 										</dl>
@@ -174,31 +219,53 @@
 										<dt><label>ver visitantes recientes?</label></dt>
 											<dd>
 												<select name="last_hits" style="width:270px;">
-												{foreach from=$tsPrivacidad item=p key=i}
-												{if $i != 1 && $i != 2}<option value="{$i}"{if $tsPerfil.p_configs.hits == $i}selected{/if}>{$p}</option>{/if}
-												{/foreach}
+                                                                                                <?    
+												foreach ($tsPrivacidad as $i=>$p)
+                                                                                                {    
+												if ($i != 1 && $i != 2)
+                                                                                                {
+                                                                                                ?>    
+                                                                                                    <option value="<? echo $i; ?>"<? if ($tsPerfil['p_configs']['hits'] == $i) echo 'selected'; ?>><? echo $p; ?></option>
+                                                                                                <?    
+                                                                                                }
+												}
+                                                                                                ?>                                                                                                
 												</select>
 											</dd>
 										</dl>
 									</div>
 									<div class="field">
 											<dl>
-												<dt><label>enviarles mensajes privados?</label><br /><span>Esta opci&oacute;n no se aplica a moderadores y administradores.</span></dt>
+												<dt><label>enviarles mensajes privados?</label><br />
+                                                                                                <span>Esta opci&oacute;n no se aplica a moderadores y administradores.</span>
+                                                                                                </dt>
 												<dd>
 													<select name="rec_mps" style="width:270px;">
-														{foreach from=$tsPrivacidad item=p key=i}
-														{if $i != 6}<option value="{$i}"{if $tsPerfil.p_configs.rmp == $i}selected{/if}>{$p}</option>{/if}
-														{/foreach}
-														<option value="8"{if $tsPerfil.p_configs.rmp == 8}selected{/if}>Deshabilitar mensajer&iacute;a (opci&oacute;n administrativa)</option>
+														<?
+                                                                                                                foreach ($tsPrivacidad as $i=>$p)
+                                                                                                                {    
+														if ($i != 6)
+                                                                                                                {
+                                                                                                                ?>   
+                                                                                                                    <option value="<? echo $i; ?>"<? if ($tsPerfil['p_configs']['rmp'] == $i) echo 'selected'; ?>><? echo $p; ?></option>
+                                                                                                                <?    
+                                                                                                                }
+														}
+                                                                                                                ?>
+														<option value="8"<? if ($tsPerfil['p_configs']['rmp'] == 8) echo 'selected'; ?>>Deshabilitar mensajer&iacute;a (opci&oacute;n administrativa)</option>
 													</select>
 												</dd>
 											</dl>
 									</div>
-                                    {elseif $tsType == 6}
+                                        <?
+                                        }
+                                        elseif ($tsType == 6)
+                                        {
+                                        ?>    
 					<legend>Eliminaci&oacute;n de contenidos</legend>
 					<input type="checkbox" id="bocuenta" name="bocuenta" onclick="$('#ext').slideToggle();"/>
                                         <label style="font-weight:bold;" for="bocuenta">Cuenta Completa</label>
-                                        <label for="bocuenta"> &nbsp; Se eliminar&aacute; la cuenta y todo el contenido relacionado a {$tsUsername}.</label>
+                                        <label for="bocuenta"> &nbsp; Se eliminar&aacute; la cuenta y todo el contenido relacionado a <? echo $tsUsername; ?>.</label>
 					<div id="ext">
                                         <br /><hr/>
                                         <input type="checkbox" id="boposts" name="boposts"/>
@@ -277,29 +344,51 @@
                                         <br /><hr/>
                                         Introduzca su contrase&ntilde;a para continuar: 
                                         <input type="password" name="password"/>
-                                        
-									{elseif $tsType == 7}
+                                        <?
+                                        }
+					elseif ($tsType == 7)
+                                        {    
+                                        ?>    
 									<legend>Modificar rango de usuario</legend>
 										<dl>
 											<dt><label>Rango actual:</label></dt>
-											<dd><strong style="color:#{$tsUserR.user.r_color}">{$tsUserR.user.r_name}</strong></dd>
+											<dd>
+                                                                                            <strong style="color:#<? echo $tsUserR['user']['r_color']; ?>"><? echo $tsUserR['user']['r_name']; ?></strong>
+                                                                                        </dd>
 										</dl>
 										<dl>
 											<dt><label for="user">Nuevo rango:</label></dt>
 											<dd><select name="new_rango">
-											{foreach from=$tsUserR.rangos item=r}
-											<option value="{$r.rango_id}" style="color:#<? echo $r['r_color']; ?>" <? if ($r['rango_id'] == $tsUserR['user']['rango_id']) echo 'selected="selected"'; ?>>{$r.r_name}</option>
-											{/foreach}
+                                                                                        <?        
+											foreach ($tsUserR['rangos'] as $r)
+                                                                                        {
+                                                                                        ?>
+											<option value="<? echo $r['rango_id']; ?>" style="color:#<? echo $r['r_color']; ?>" <? if ($r['rango_id'] == $tsUserR['user']['rango_id']) echo 'selected="selected"'; ?>><? echo $r['r_name']; ?></option>
+											<?
+                                                                                        }
+                                                                                        ?>
 											</select></dd>
 										</dl>
-									{elseif $tsType == 8}
+                                        <?
+                                        }
+					elseif ($tsType == 8)
+                                        {
+                                        ?>    
 									<legend>Modificar firma de usuario</legend>
-									<textarea name="firma" rows="3" cols="50">{$tsUserF.user_firma}</textarea>
-									{else}
+									<textarea name="firma" rows="3" cols="50"><? echo $tsUserF['user_firma']; ?></textarea>
+                                        <?
+                                        }
+                                         else
+                                        {
+                                        ?>
 									<div class="phpostAlfa">Pendiente</div>
-									{/if}
+					<?                                        
+                                        }                                        
+                                        ?>
 									<p><input type="submit" name="save" value="Enviar Cambios" class="btn_g"/></p>
 									</fieldset>
 								</form>
-								{/if}
+                                            <?
+                                    }
+                                    ?>
 								</div>
