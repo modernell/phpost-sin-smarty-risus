@@ -33,6 +33,7 @@
 		$tsPage = 'aviso';
 		$tsAjax = 0;
 		$smarty->assign("tsAviso",$tsLevelMsg);
+                $tsAviso=$tsLevelMsg;
 		//
 		$tsContinue = false;
 	}
@@ -51,11 +52,14 @@
 	//
 	$fecha = (int) empty($_GET['fecha']) || $_GET['fecha'] > 5 ? 5 : $_GET['fecha'];
 	$smarty->assign("tsFecha",$fecha);
+        $tsFecha=$fecha;
 	$cat = (int) empty($_GET['cat']) ? 0 : $_GET['cat'];
 	$smarty->assign("tsCat",$cat);
+        $tsCat=$cat;
 	//
 	$action = empty($_GET['action']) ? 'posts' : $_GET['action'];
 	$smarty->assign("tsAction",$action);
+        $tsAction=$action;
 	
 
 /**********************************\
@@ -67,9 +71,11 @@
 		switch($action){
 			case 'posts':
 				$smarty->assign("tsTops",$tsTops->getTopPosts($fecha, $cat));
+                                $tsTops=$tsTops->getTopPosts($fecha, $cat);
 			break;
             case 'usuarios':
                 $smarty->assign("tsTops",$tsTops->getTopUsers($fecha, $cat));
+                $tsTops=$tsTops->getTopUsers($fecha, $cat);
             break;
 		}
 
@@ -83,6 +89,7 @@
 if(empty($tsAjax)) {	// SI LA PETICION SE HIZO POR AJAX DETENER EL SCRIPT Y NO MOSTRAR PLANTILLA, SI NO ENTONCES MOSTRARLA.
 
 	$smarty->assign("tsTitle",$tsTitle);	// AGREGAR EL TITULO DE LA PAGINA ACTUAL
+        $tsTitle=$tsTitle;
 
 	/*++++++++ = ++++++++*/
 	include("../../footer.php");
