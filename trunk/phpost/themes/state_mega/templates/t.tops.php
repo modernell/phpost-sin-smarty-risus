@@ -1,11 +1,11 @@
-<? include 'sections/main_header.php'; ?>
+<? include 'sections/main_header.php'; 
 
-		{include file='modules/m.top_sidebar.tpl'}
-                {if $tsAction == 'posts'}
-                    {include file='modules/m.top_posts.tpl'}
-                {elseif $tsAction == 'usuarios'}
-                    {include file='modules/m.top_users.tpl'}
-                {/if}
+		include 'modules/m.top_sidebar.php';
+                if ($tsAction == 'posts')
+                    include 'modules/m.top_posts.php';
+                elseif ($tsAction == 'usuarios')
+                    include 'modules/m.top_users.php';                
+                ?>
                 <div style="clear: both;"></div>
                 
 <? include 'sections/main_footer.php'; ?>
