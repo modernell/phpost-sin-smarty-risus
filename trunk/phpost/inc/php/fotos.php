@@ -35,10 +35,12 @@
 	}
 	// VERIFICAMOS EL NIVEL DE ACCSESO ANTES CONFIGURADO
 	$tsLevelMsg = $tsCore->setLevel($tsLevel, true);
-	if($tsLevelMsg != 1){	
+	if($tsLevelMsg != 1)
+        {	
 		$tsPage = 'aviso';
 		$tsAjax = 0;
 		$smarty->assign("tsAviso",$tsLevelMsg);
+                $tsAviso=$tsLevelMsg;
 		//
 		$tsContinue = false;
 	}
@@ -62,20 +64,27 @@
     switch($action){
         case '':
             $smarty->assign("tsLastFotos", $tsFotos->getLastFotos());
+            $tsLastFotos=$tsFotos->getLastFotos();
             $smarty->assign("tsLastComments", $tsFotos->getLastComments());
-			$q = mysql_fetch_assoc(mysql_query('SELECT COUNT(DISTINCT u.user_id) AS stats_miembros, COUNT(DISTINCT f.foto_id) AS stats_fotos, COUNT(DISTINCT fc.cid) AS stats_foto_comments FROM u_miembros AS u LEFT JOIN f_fotos AS f ON u.user_id = f.f_user && f.f_status = \'0\' LEFT JOIN f_comentarios AS fc ON u.user_id = fc.c_user WHERE u.user_activo = \'1\' && u.user_baneado = \'0\''));
+            $tsLastComments=$tsFotos->getLastComments();
+            $q = mysql_fetch_assoc(mysql_query('SELECT COUNT(DISTINCT u.user_id) AS stats_miembros, COUNT(DISTINCT f.foto_id) AS stats_fotos, COUNT(DISTINCT fc.cid) AS stats_foto_comments FROM u_miembros AS u LEFT JOIN f_fotos AS f ON u.user_id = f.f_user && f.f_status = \'0\' LEFT JOIN f_comentarios AS fc ON u.user_id = fc.c_user WHERE u.user_activo = \'1\' && u.user_baneado = \'0\''));
             $smarty->assign("tsStats", $q);
+            $tsStats=$q;
             
         break;
         case 'agregar':
-            if(!empty($_POST['titulo'])){
+            if(!empty($_POST['titulo']))
+            {
                 $result = $tsFotos->newFoto();
                 $tsPage = 'aviso';
-                if(!is_array($result) && $result > 0){
+                if(!is_array($result) && $result > 0)
+                {
                     $titulo = $tsCore->setSecure($_POST['titulo']);
                     $smarty->assign("tsAviso",array('titulo' => 'Foto Agregada', 'mensaje' => "La imagen <b>".$titulo."</b> fue agregada.", 'but' => 'Ver imagen', 'link' => "{$tsCore->settings['url']}/fotos/{$tsUser->nick}/{$result}/".$tsCore->setSEO($titulo).".html"));
+                    $tsAviso=array('titulo' => 'Foto Agregada', 'mensaje' => "La imagen <b>".$titulo."</b> fue agregada.", 'but' => 'Ver imagen', 'link' => "{$tsCore->settings['url']}/fotos/{$tsUser->nick}/{$result}/".$tsCore->setSEO($titulo).".html");    
                 } else {
                     $smarty->assign("tsAviso",array('titulo' => 'Opps...', 'mensaje' => $result, 'but' => 'Volver', 'link' => "{$tsCore->settings['url']}/fotos/agregar.php"));
+                    $tsAviso=array('titulo' => 'Opps...', 'mensaje' => $result, 'but' => 'Volver', 'link' => "{$tsCore->settings['url']}/fotos/agregar.php");
                 }
             }
             
@@ -140,6 +149,7 @@
 
 \*********************************/
     $smarty->assign("tsAction",$action);
+    $tsAction=$action;
     
 }
 
