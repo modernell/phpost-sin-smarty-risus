@@ -19,7 +19,7 @@ if ($tsUser->is_admod && $tsConfig['c_see_mod'] && $tsConfig['novemods']['total'
 ?>
 
 <!-- AGREGAMOS UN ESTILO EXTRA SI EXISTE -->
-<link href="<? echo $tsConfig['css']; ?>/<? echo $tsPage['css']; ?>" rel="stylesheet" type="text/css" />
+<link href="<? echo $tsConfig['css']; ?>/<? echo $tsPage; ?>.css" rel="stylesheet" type="text/css" />
 
 <link rel="shortcut icon" href="<? echo $tsConfig['images']; ?>/favicon.ico" type="image/x-icon" />
 <script src="<? echo $tsConfig['js']; ?>/jquery.min.js" type="text/javascript"></script>
