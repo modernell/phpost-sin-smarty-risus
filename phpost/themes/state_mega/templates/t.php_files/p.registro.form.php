@@ -31,12 +31,17 @@
 			<label>Fecha de Nacimiento</label>
 			<select id="dia" name="dia" tabindex="5" onblur="registro.blur(this)" onfocus="registro.focus(this)" autocomplete="off" title="Ingrese d&iacute;a de nacimiento">
                         <option value="">D&iacute;a</option>
-                        {section name=dias start=1 loop=32}
-                            <option value="{$smarty.section.dias.index}">{$smarty.section.dias.index}</option>
-                        {/section}
+                        <?
+                        for($i=1; $i<32; $i++)
+                        {
+                        ?>
+                            <option value="<? echo $i; ?>"><? echo $i; ?></option>
+                        <?    
+                        }
+                        ?>
 			</select>
 			<select id="mes" name="mes" tabindex="6" onblur="registro.blur(this)" onfocus="registro.focus(this)" autocomplete="off" title="Ingrese mes de nacimiento">
-				<option value="">Mes</option>
+			<option value="">Mes</option>
                                 <? foreach ($tsMeces as $mid=>$mes)
                                 {
                                 ?>
@@ -47,18 +52,15 @@
                         </select>
 			<select id="anio" name="anio" tabindex="7" onblur="registro.blur(this)" onfocus="registro.focus(this)" autocomplete="off" title="Ingrese a&ntilde;o de nacimiento">
 				<option value="">A&ntilde;o</option>
-                                
-<!--                                for($anio=(date("Y")+1); 1980<=$anio; $anio--)
-                                {
-				echo "<option value=&#39;".$anio."&#39;>".$anio."</option>";
-				}-->
                                 <?  
+                                $year=$tsEndY;
 //                                section name=year start=$tsEndY loop=$tsEndY step=-1 max=$tsMax}
-                                for ($start=$tsEndY; $start<=$tsMax; $start--)
-                                {
+                                for ($i=0; $i<$tsMax; $i++)
+                                {                                    
                                 ?>
-                                <option value="<? echo $start; ?>"><? echo $start;//$smarty['section']['year']['index']; ?></option>
+                                    <option value="<? echo $year; ?>"><? echo $year; ?></option>
                                 <?                                
+                                    $year--;
                                 } 
                                 ?>
 			</select>

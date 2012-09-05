@@ -32,12 +32,11 @@ include 'sections/main_header.php';
                             <?
                             include 'modules/m.cuenta_cuenta.php';
                             include 'modules/m.cuenta_perfil.php';
+                            include 'modules/m.cuenta_block.php';
+                            include 'modules/m.cuenta_clave.php';
+                            include 'modules/m.cuenta_nick.php';
+                            include 'modules/m.cuenta_config.php';
                             ?>
-                            {include file='modules/m.cuenta_perfil.tpl'}
-                            {include file='modules/m.cuenta_block.tpl'}
-                            {include file='modules/m.cuenta_clave.tpl'}
-                            {include file='modules/m.cuenta_nick.tpl'}
-                            {include file='modules/m.cuenta_config.tpl'}
                         </form>
                     </div>
                     <div class="floatR">
@@ -47,8 +46,6 @@ include 'sections/main_header.php';
                     </div>
                 </div>
                 <div style="clear:both"></div>
-               
-
 <?
 include 'sections/main_footer.php';
 ?>

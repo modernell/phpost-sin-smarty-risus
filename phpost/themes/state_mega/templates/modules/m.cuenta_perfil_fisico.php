@@ -5,20 +5,25 @@
                                     <div class="field">
                                         <label for="altura">Mi altura</label>
                                         <div class="input-fake">
-                                            <input type="text" value="{if $tsPerfil.p_altura}{$tsPerfil.p_altura}{/if}" maxlength="3" name="altura" id="altura" class="text cuenta-save-3">&nbsp;cent&iacute;metros					</div>
+                                            <input type="text" value="<? if ($tsPerfil['p_altura']) echo $tsPerfil['p_altura']; ?>" maxlength="3" name="altura" id="altura" class="text cuenta-save-3">&nbsp;cent&iacute;metros</div>
                                     </div>
                                     <div class="field">
                                         <label for="peso">Mi peso</label>
                                         <div class="input-fake">
-                                            <input type="text" value="{if $tsPerfil.p_peso > 0}{$tsPerfil.p_peso}{/if}" maxlength="3" name="peso" id="peso" class="text cuenta-save-3">&nbsp;kilogramos					</div>
+                                            <input type="text" value="<? if ($tsPerfil['p_peso'] > 0) echo $tsPerfil['p_peso']; ?>" maxlength="3" name="peso" id="peso" class="text cuenta-save-3">&nbsp;kilogramos</div>
                                     </div>
                                     <div class="field">
                                         <label for="pelo_color">Color de pelo</label>
                                         <div class="input-fake">
                                             <select class="cuenta-save-3" name="pelo_color" id="pelo_color">
-                                            	{foreach from=$tsPData.pelo key=val item=text}
-                                                <option value="{$val}" {if $tsPerfil.p_pelo == $val}selected="selected"{/if}>{$text}</option>
-                                                {/foreach}
+                                                <?
+                                            	foreach ($tsPData['pelo'] as $val=>$text)
+                                                {
+                                                ?>
+                                                <option value="<? echo $val; ?>" <? if ($tsPerfil['p_pelo'] == $val) echo 'selected="selected"'; ?>><? echo $text; ?></option>
+                                                <?
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -26,9 +31,14 @@
                                         <label for="ojos_color">Color de ojos</label>
                                         <div class="input-fake">
                                             <select class="cuenta-save-3" name="ojos_color" id="ojos_color">
-                                            	{foreach from=$tsPData.ojos key=val item=text}
-                                                <option value="{$val}" {if $tsPerfil.p_ojos == $val}selected="selected"{/if}>{$text}</option>
-                                                {/foreach}
+                                                <?
+                                            	foreach ($tsPData['ojos'] as $val=>$text)
+                                                {
+                                                ?>
+                                                <option value="<? echo $val; ?>" <? if ($tsPerfil['p_ojos'] == $val) echo 'selected="selected"'; ?>><? echo $text; ?></option>
+                                                <?
+                                                }
+                                                ?>                                            	
                                             </select>
                                         </div>
                                     </div>
@@ -36,9 +46,14 @@
                                         <label for="fisico">Complexi&oacute;n</label>
                                         <div class="input-fake">
                                             <select class="cuenta-save-3" name="fisico" id="fisico">
-                                            	{foreach from=$tsPData.fisico key=val item=text}
-                                                <option value="{$val}" {if $tsPerfil.p_fisico == $val}selected="selected"{/if}>{$text}</option>
-                                                {/foreach}
+                                                <?
+                                            	foreach ($tsPData['fisico'] as $val=>$text)
+                                                {
+                                                ?>
+                                                <option value="<? echo $val; ?>" <? if ($tsPerfil['p_fisico'] == $val) echo 'selected="selected"'; ?>><? echo $text; ?></option>
+                                                <?
+                                                }
+                                                ?>                                            	
                                             </select>
                                         </div>
                                     </div>
@@ -46,9 +61,14 @@
                                         <label for="dieta">Mi dieta es</label>
                                         <div class="input-fake">
                                             <select class="cuenta-save-3" name="dieta" id="dieta">
-                                            	{foreach from=$tsPData.dieta key=val item=text}
-                                                <option value="{$val}" {if $tsPerfil.p_dieta == $val}selected="selected"{/if}>{$text}</option>
-                                                {/foreach}
+                                                <?
+                                            	foreach ($tsPData['dieta'] as $val=>$text)
+                                                {
+                                                ?>
+                                                <option value="<? echo $val; ?>" <? if ($tsPerfil['p_dieta'] == $val) echo 'selected="selected"'; ?>><? echo $text; ?></option>
+                                                <?
+                                                }
+                                                ?>                                            	
                                             </select>
                                         </div>
                                     </div>
@@ -56,9 +76,14 @@
                                         <label>Tengo</label>
                                         <div class="input-fake">
                                             <ul>
-	                                            {foreach from=$tsPData.tengo key=val item=text}
-                                                <li><input type="checkbox" name="t_{$val}" class="cuenta-save-3" value="1" {if $tsPerfil.p_tengo.$val == 1}checked="checked"{/if}>{$text}</li>
-                                                {/foreach}
+                                                <?
+                                            	foreach ($tsPData['tengo'] as $val=>$text)
+                                                {
+                                                ?>
+                                                <li><input type="checkbox" name="t_<?echo $val; ?>" class="cuenta-save-3" value="1" <? if ($tsPerfil['p_tengo'][$val] == 1) echo 'checked="checked"'; ?>><? echo $text; ?></li>
+                                                <?
+                                                }
+                                                ?>
                                             </ul>
                                         </div>
                                     </div>
@@ -66,9 +91,17 @@
                                         <label for="fumo">Fumo</label>
                                         <div class="input-fake">
                                             <select class="cuenta-save-3" name="fumo" id="fumo">
-                                            	{foreach from=$tsPData.fumo_tomo key=val item=text}
+                                                <?
+                                            	foreach ($tsPData['fumo_tomo'] as $val=>$text)
+                                                {
+                                                ?>
+                                                <option value="<? echo $val; ?>" <? if ($tsPerfil['p_fumo'] == $val) echo 'selected="selected"'; ?>><? echo $text; ?></option>
+                                                <?
+                                                }
+                                                ?>
+<!--                                            	{foreach from=$tsPData.fumo_tomo key=val item=text}
                                                 <option value="{$val}" {if $tsPerfil.p_fumo == $val}selected="selected"{/if}>{$text}</option>
-                                                {/foreach}
+                                                {/foreach}-->
                                             </select>
                                         </div>
                                     </div>
@@ -76,6 +109,14 @@
                                         <label for="tomo_alcohol">Tomo alcohol</label>
                                         <div class="input-fake">
                                             <select class="cuenta-save-3" name="tomo_alcohol" id="tomo_alcohol">
+                                                <?
+                                            	foreach ($tsPData['fumo_tomo'] as $val=>$text)
+                                                {
+                                                ?>
+                                                <option value="<? echo $val; ?>" <? if ($tsPerfil['p_tomo'] == $val) echo 'selected="selected"'; ?>><? echo $text; ?></option>
+                                                <?
+                                                }
+                                                ?>
                                             	{foreach from=$tsPData.fumo_tomo key=val item=text}
                                                 <option value="{$val}" {if $tsPerfil.p_tomo == $val}selected="selected"{/if}>{$text}</option>
                                                 {/foreach}
