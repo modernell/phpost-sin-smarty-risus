@@ -65,7 +65,9 @@
 		$max_year = 100 - $tsCore->settings['c_allow_edad'];
 		$end_year = $now_year - $tsCore->settings['c_allow_edad'];
 		$smarty->assign("tsMax",$max_year);
+                $tsMax=$max_year;                
 		$smarty->assign("tsEndY",$end_year);
+                $tsEndY=$end_year;
 		// PERFIL INFO
                 $tsPerfil = $tsCuenta->loadPerfil();
 		$smarty->assign("tsPerfil",$tsPerfil);

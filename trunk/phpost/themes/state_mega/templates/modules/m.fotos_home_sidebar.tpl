@@ -8,7 +8,8 @@
                                     {if $tsUser->is_admod && $tsConfig.c_see_mod == 1 && $tsFoto.f_status != 0 || $tsFoto.user_activo == 0}
                                     
                                         <span style="color: {if $c.user_activo == 0} brown {elseif $c.f_status == 1} purple {elseif $c.f_status == 2} red{/if};" class="qtip" title="{if $c.user_activo == 0}El autor del comentario tiene la cuenta desactivada {elseif $c.f_status == 1} La foto se encuentra oculta {elseif $c.f_status == 2} La foto se encuentra eliminada{/if}">
-                                    {/if}{$tsUser->getUsername($c.c_user)}
+                                    {/if}
+                                    {$tsUser->getUsername($c.c_user)}
                                     {if $c.user_activo == 0 || $c.f_status != 0 && $tsUser->is_admod}
                                         </span>
                                     {/if}
