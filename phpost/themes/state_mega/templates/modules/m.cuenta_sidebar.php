@@ -8,12 +8,12 @@
                         	<li class="local-file">
                             	<span><a onclick="avatar.chgtab(this)" id="avatar-local">Local</a></span>
                                 <div class="mini-modal" style="display: none;">
-									<div class="dialog-m"></div>
-									<span>Subir Archivo</span>
-									<input type="file" name="file-avatar" id="file-avatar" size="15" class="browse"/><br/>
+                                    <div class="dialog-m"></div>
+					<span>Subir Archivo</span>
+					<input type="file" name="file-avatar" id="file-avatar" size="15" class="browse"/><br/>
                                     <button onclick="avatar.upload(this)" class="avatar-next local">Subir</button>
-								</div>
-                            </li>
+				</div>
+                                </li>
                         	<li class="url-file">
                             	<span><a onclick="avatar.chgtab(this)" id="avatar-url">Url</a></span>
                                 <div class="mini-modal" style="display: none;">
