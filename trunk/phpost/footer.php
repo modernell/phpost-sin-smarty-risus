@@ -28,7 +28,7 @@
     } else $smarty_next = true;
     
     
-    // Mostramos la plantilla
+    // Aqui vamos llamando el template segun la pagina solicitada - esta parte es como el enlace del script y el theme donde se meustra el resultado
     if($smarty_next == true) include_once(TS_THEME."t.$tsPage.php");
     else die("0: Lo sentimos, Error al cargar la plantilla del theme. Contacte al administrador");
         // Mostramos la plantilla

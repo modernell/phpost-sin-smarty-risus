@@ -1,4 +1,4 @@
-							<div class="content-tabs cuenta">
+			<div class="content-tabs cuenta">
                             	<div class="alert-cuenta cuenta-1"></div>
                                 <fieldset>
                                     <div class="field">
@@ -72,19 +72,11 @@
 					</select>
                                         <? // echo $tsEndY."/////".$tsMax."--------------"; ?>
 					<select class="cuenta-save-1" name="ano">                                           
-                                        <?    
-                                        
-                                        //{assign var=firstyear value="2003"}
-//                                        {assign var=thisyear value=$smarty.now|date_format:"%Y"}
-//
-//                                        {section name=yearValue start=$thisyear loop=$firstyear step=-1}
-//                                          {$smarty.section.yearValue.index}
-//                                        {/section}
+                                        <?
                                         $year=$tsEndY;
 
                                         for($i=1;$i<=$tsMax; $i++)
-                                        {
-                                            
+                                        {                                            
                                     	//{section name=year start=$tsEndY loop=$tsEndY step=-1 max=$tsMax}
                                         ?>
                                         	 <option value="<? echo $year; ?>" <? if ($tsPerfil['user_ano'] ==  $year) echo 'selected="selected"'; ?>><? echo $year; ?></option>

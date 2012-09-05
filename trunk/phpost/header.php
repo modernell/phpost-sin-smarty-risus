@@ -20,8 +20,8 @@
     if(!isset($_SESSION)) session_start();
 
     // Reporte de errores
-    //error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
-    //ini_set('display_errors', TRUE);
+    error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
+    ini_set('display_errors', TRUE);
 
     // L�mite de ejecuci�n
     set_time_limit(300);
