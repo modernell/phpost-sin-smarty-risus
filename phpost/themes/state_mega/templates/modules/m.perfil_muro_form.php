@@ -38,7 +38,7 @@
                             <div class="attaFrame">
                                 <div id="attaContent">
                                     <div id="statusFrame" style="padding:1px 5px; display:block">
-                                        <textarea class="status autogrow" id="wall" onfocus="onfocus_input(this)" onblur="onblur_input(this)" title="{if $tsInfo.uid == $tsUser->uid}&iquest;Qu&eacute; est&aacute;s pensando?{else}Escribe algo....{/if}"></textarea>
+                                        <textarea class="status autogrow" id="wall" onfocus="onfocus_input(this)" onblur="onblur_input(this)" title="<? if ($tsInfo['uid'] == $tsUser->uid) echo '&iquest;Qu&eacute; est&aacute;s pensando?'; else echo 'Escribe algo....'; ?>"></textarea>
                                     </div>
                                     <div id="fotoFrame">
                                         <input type="text" class="itext" name="ifoto" value="http://www.phpost.net/images/ejemplo.jpg" title="http://www.phpost.net/images/ejemplo.jpg" onfocus="onfocus_input(this)" onblur="onblur_input(this)"/>

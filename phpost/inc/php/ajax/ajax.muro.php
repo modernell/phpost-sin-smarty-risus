@@ -11,7 +11,7 @@
 
 \*********************************/
 
-	// NIVELES DE ACCESO Y PLANTILLAS DE CADA ACCIÓN
+	// NIVELES DE ACCESO Y PLANTILLAS DE CADA ACCIï¿½N
 	$files = array(
 		'muro-stream' => array('n' => 2, 'p' => 'stream'),
         'muro-likes' => array('n' => 2, 'p' => '')
@@ -60,6 +60,7 @@
                     // ASIGNAMOS
                     $tsWall['data'][1] = $tsStream;
                     $smarty->assign("tsMuro",$tsWall);
+                    $tsMuro=$tsWall;
                     $tsPrivacidad['mf']['v'] = true;
                     $smarty->assign("tsPrivacidad", $tsPrivacidad);  
                 } 
@@ -83,6 +84,7 @@
                 }
                 else {
                     $smarty->assign("tsMuro",$tsStream);            
+                    $tsMuro=$tsStream;
                 }  
             } elseif($do == 'repost'){
                 $tsPage = 'php_files/p.muro.stream.comments'; // TEMPLATE
@@ -96,6 +98,7 @@
                 else {
                     $tsComments['data'][1] = $tsRepost;
                     $smarty->assign("tsComments",$tsComments);  
+                    $tsComments=$tsComments;
                 } 
             } elseif($do == 'more_comments'){
                 $tsPage = 'php_files/p.muro.stream.comments'; // TEMPLATE
