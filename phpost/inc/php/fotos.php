@@ -61,7 +61,8 @@
 
 \*********************************/
 
-    switch($action){
+    switch($action)
+    {
         case '':
             $smarty->assign("tsLastFotos", $tsFotos->getLastFotos());
             $tsLastFotos=$tsFotos->getLastFotos();
@@ -82,9 +83,11 @@
                     $titulo = $tsCore->setSecure($_POST['titulo']);
                     $smarty->assign("tsAviso",array('titulo' => 'Foto Agregada', 'mensaje' => "La imagen <b>".$titulo."</b> fue agregada.", 'but' => 'Ver imagen', 'link' => "{$tsCore->settings['url']}/fotos/{$tsUser->nick}/{$result}/".$tsCore->setSEO($titulo).".html"));
                     $tsAviso=array('titulo' => 'Foto Agregada', 'mensaje' => "La imagen <b>".$titulo."</b> fue agregada.", 'but' => 'Ver imagen', 'link' => "{$tsCore->settings['url']}/fotos/{$tsUser->nick}/{$result}/".$tsCore->setSEO($titulo).".html");    
-                } else {
+                }
+                else
+                {
                     $smarty->assign("tsAviso",array('titulo' => 'Opps...', 'mensaje' => $result, 'but' => 'Volver', 'link' => "{$tsCore->settings['url']}/fotos/agregar.php"));
-                    $tsAviso=array('titulo' => 'Opps...', 'mensaje' => $result, 'but' => 'Volver', 'link' => "{$tsCore->settings['url']}/fotos/agregar.php");
+                    $tsAviso=array('titulo' => 'Opppppps...', 'mensaje' => $result, 'but' => 'Volver', 'link' => "{$tsCore->settings['url']}/fotos/agregar.php");
                 }
             }
             
@@ -156,6 +159,7 @@
 if(empty($tsAjax)) {	// SI LA PETICION SE HIZO POR AJAX DETENER EL SCRIPT Y NO MOSTRAR PLANTILLA, SI NO ENTONCES MOSTRARLA.
 
 	$smarty->assign("tsTitle",$tsTitle);	// AGREGAR EL TITULO DE LA PAGINA ACTUAL
+        
 
 	/*++++++++ = ++++++++*/
 	include("../../footer.php");

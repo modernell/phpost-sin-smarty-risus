@@ -1,10 +1,14 @@
 <? include 'sections/main_header.php'; ?>
-		<script type="text/javascript" src="{$tsConfig.default}/js/perfil.js"></script>
-                <script type="text/javascript" src="{$tsConfig.default}/js/portal.js"></script>
+		<script type="text/javascript" src="<? echo $tsConfig['default']; ?>/js/perfil.js"></script>
+                <script type="text/javascript" src="<? echo $tsConfig['default']; ?>/js/portal.js"></script>
                 <div id="left_box">
-                    {include file='modules/m.portal_userbox.tpl'}
+                    <?
+                    include 'modules/m.portal_userbox.php';
+                    ?>
                     <br class="spacer"/>
-                    {include file='modules/m.global_ads_160.tpl'}
+                    <?
+                    //include 'modules/m.global_ads_160.php';
+                    ?>
                 </div>
                 <div id="center_box">
                     <div id="portal">
@@ -18,19 +22,21 @@
                             <div class="clearBoth"></div>
                         </div>
                         <div id="portal_content">
-                            {include file='modules/m.portal_noticias.tpl'}
-                            {include file='modules/m.portal_activity.tpl'}
-                            {include file='modules/m.portal_posts.tpl'}
-                            {include file='modules/m.portal_posts_favoritos.tpl'}
+                        <?    
+                            include 'modules/m.portal_noticias.php';
+                       ?>     
+                            include 'modules/m.portal_activity.php';
+                            include 'modules/m.portal_posts.php';
+                            include 'modules/m.portal_posts_favoritos.php';
                         </div>
                     </div>
                 </div>
                 <div id="right_box">
                     <br />
-                    {include file='modules/m.home_stats.tpl'}
-                    {include file='modules/m.portal_posts_visitados.tpl'}
-                    {include file='modules/m.portal_fotos.tpl'}
-                    {include file='modules/m.portal_afiliados.tpl'}
+                    include 'modules/m.home_stats.php';
+                    include 'modules/m.portal_posts_visitados.php';
+                    include 'modules/m.portal_fotos.php';
+                    include 'modules/m.portal_afiliados.php';
                     <!--Poner aqui mas modulos-->
                 </div>
                 <div style="clear:both"></div>
