@@ -11,7 +11,7 @@
 
 \*********************************/
 
-	// NIVELES DE ACCESO Y PLANTILLAS DE CADA ACCIÓN
+	// NIVELES DE ACCESO Y PLANTILLAS DE CADA ACCIï¿½N
 	$files = array(
         'perfil-wall' => array('n' => 0, 'p' => 'wall'),
         'perfil-actividad' => array('n' => 0, 'p' => 'actividad'),
@@ -62,11 +62,13 @@
             $priv = $tsMuro->getPrivacity($user_id, $username, $tsCuenta->iFollow($user_id));
             if($priv['m']['v'] == true){
                 $smarty->assign("tsMuro",$tsMuro->getWall($user_id));
+                $tsMuro=$tsMuro->getWall($user_id);
                 // INFO
                 $tsInfo = array('uid' => $user_id, 'nick' => $username);
                 $smarty->assign("tsInfo",$tsInfo);   
             }
             $smarty->assign("tsPrivacidad",$priv);
+            $tsPrivacidad=$priv;
         break;
         case 'perfil-actividad':
             //<---
@@ -77,8 +79,11 @@
             if($ac_do != 'borrar'){
                 $actividad = $tsActividad->getActividad($user_id, $ac_type, $start);
                 $smarty->assign("tsActividad",$actividad);
+                $tsActividad=$actividad;
                 $smarty->assign("tsDo",$ac_do);
+                $tsDo=$ac_do;
                 $smarty->assign("tsUserID",$user_id);
+                $tsUserID=$user_id;
             } else {
                 echo $tsActividad->delActividad();
                 die;

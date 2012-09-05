@@ -33,6 +33,7 @@
 		$tsPage = 'aviso';
 		$tsAjax = 0;
 		$smarty->assign("tsAviso",$tsLevelMsg);
+                $tsAviso=$tsLevelMsg;
 		//
 		$tsContinue = false;
 	}
@@ -104,21 +105,30 @@
             if(!is_array($story)){
                 $tsPage = 'aviso';
                 $smarty->assign("tsAviso",array('titulo' => 'Opps...', 'mensaje' => $story, 'but' => 'Ir a pagina principal', 'link' => "{$tsCore->settings['url']}"));
+                $tsAviso=array('titulo' => 'Opps...', 'mensaje' => $story, 'but' => 'Ir a pagina principal', 'link' => "{$tsCore->settings['url']}");
             }
             else {
                 $story['data'][1] = $story;
                 $smarty->assign("tsMuro", $story);
+                $tsMuro=$story;
                 $smarty->assign("tsType","story");
+                $tsType=$story;
             }
         }elseif($tsCore->settings['c_allow_portal'] == 0 && $tsInfo['uid'] == $tsUser->uid){
             $smarty->assign("tsMuro",$tsMuro->getNews());
+            $tsMuro=$tsMuro->getNews();
             $smarty->assign("tsType","news");
-        }else{
+            $tsType=$news;
+        }else
+        {
             $smarty->assign("tsMuro",$tsMuro->getWall($usuario['user_id']));
+            $tsMuro=$tsMuro->getWall($usuario['user_id']);
             $smarty->assign("tsType","wall");
+            $tsType=$wall;
         }
     }
     $smarty->assign("tsPrivacidad",$priv);
+    $tsPrivacidad=$priv;
 	// TITULO
 	$tsTitle = 'Perfil de '.$tsInfo['nick'].' - '.$tsTitle;
  
