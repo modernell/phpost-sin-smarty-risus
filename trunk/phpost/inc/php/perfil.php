@@ -51,6 +51,7 @@
 		$tsPage = 'aviso';
 		$tsAjax = 0;
 		$smarty->assign("tsAviso",array('titulo' => 'Opps!', 'mensaje' => (empty($usuario['user_id']) ? 'El usuario no existe' : 'La cuenta de '.$usuario['user_name'].' se encuentra inhabilitada' ), 'but' => 'Ir a p&aacute;gina principal'));
+                $tsAviso=array('titulo' => 'Opps!', 'mensaje' => (empty($usuario['user_id']) ? 'El usuario no existe' : 'La cuenta de '.$usuario['user_name'].' se encuentra inhabilitada' ), 'but' => 'Ir a p&aacute;gina principal');
 
 	} else {
 	//
