@@ -73,6 +73,7 @@
 		$smarty->assign("tsPerfil",$tsPerfil);
 		// PERFIL DATA
 		$smarty->assign("tsPData",$tsPerfilData);
+                $tsPData=$tsPerfilData;
                 $smarty->assign("tsPrivacidad",$tsPrivacidad);
 		// DATOS
 		$smarty->assign("tsPaises",$tsPaises);

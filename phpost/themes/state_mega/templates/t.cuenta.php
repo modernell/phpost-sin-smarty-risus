@@ -30,7 +30,8 @@ include 'sections/main_header.php';
                         <a name="alert-cuenta"></a>
                         <form class="horizontal" method="post" action="" name="editarcuenta">
                             <?
-                            include 'modules/m.cuenta_cuenta.php'
+                            include 'modules/m.cuenta_cuenta.php';
+                            include 'modules/m.cuenta_perfil.php';
                             ?>
                             {include file='modules/m.cuenta_perfil.tpl'}
                             {include file='modules/m.cuenta_block.tpl'}
