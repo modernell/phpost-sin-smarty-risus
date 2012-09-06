@@ -121,8 +121,8 @@
                             ?>
                             <li <? if ($tsType == 'wall') echo 'class="selected"'; ?>>
                             <a href="#" onclick="perfil.load_tab('wall', this); return false">Muro</a></li>
-                            <li><a href="#" onclick="perfil.load_tab('actividad', this); return false" id="actividad">Actividad</a></li>
-                            <li><a href="#" onclick="perfil.load_tab('info', this); return false" id="informacion">Informaci&oacute;n</a></li>
+                            <li><a href="#" onclick="perfil.load_tab('info', this); return false" id="informacion">Perfil P&uacute;blico de <? echo $tsInfo['nick']; ?> </a></li>
+                            <li><a href="#" onclick="perfil.load_tab('actividad', this); return false" id="actividad">Actividad</a></li>                            
                             <li><a href="#" onclick="perfil.load_tab('posts', this); return false">Posts</a></li>
                             <li><a href="#" onclick="perfil.load_tab('seguidores', this); return false" id="seguidores">Seguidores</a></li>
                             <li><a href="#" onclick="perfil.load_tab('siguiendo', this); return false" id="siguiendo">Siguiendo</a></li>
