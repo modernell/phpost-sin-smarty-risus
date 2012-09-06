@@ -50,6 +50,7 @@
     if(empty($user_id)) die('0: El campo <b>user_id</b> es obligatorio.');
     $username = $tsUser->getUserName($user_id);
     $smarty->assign("tsUsername",$username);
+    $tsUsername=$username;
 	// CODIGO
 	switch($action){
         case 'perfil-wall':
@@ -98,6 +99,7 @@
     		$smarty->assign("tsPerfil",$tsPerfil);
             // PAIS
             $smarty->assign("tsPais",$tsPaises[$tsPerfil['user_pais']]);
+            $tsPais=$tsPaises[$tsPerfil['user_pais']];
             // GUSTOS VACIOS?=
             $i = 0;
             foreach($tsPerfil['p_gustos'] as $key => $val){
@@ -107,11 +109,13 @@
             $smarty->assign("tsGustos",$tsGustos);
     		// PERFIL DATA
     		$smarty->assign("tsPData",$tsPerfilData);
+                $tsPData=$tsPerfilData;
 			//--->
 		break;
         case 'perfil-posts':
             //<---
             $smarty->assign("tsGeneral",$tsCuenta->loadPosts($user_id));
+            $tsGeneral=$tsCuenta->loadPosts($user_id);
             //--->
         break;
         case 'perfil-seguidores':
