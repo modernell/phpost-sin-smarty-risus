@@ -23,10 +23,10 @@
                         </div>
                         <div id="portal_content">
                         <?    
-                            include 'modules/m.portal_noticias.php';
-                       ?>     
-                            include 'modules/m.portal_activity.php';
+                            include 'modules/m.portal_noticias.php';                            
+                            include 'modules/m.portal_activity.php';                            
                             include 'modules/m.portal_posts.php';
+                            ?>
                             include 'modules/m.portal_posts_favoritos.php';
                         </div>
                     </div>

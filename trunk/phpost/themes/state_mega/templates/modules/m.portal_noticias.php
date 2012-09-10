@@ -11,18 +11,29 @@
                         </div>
 						<div class="widget clearfix" id="perfil-news">
                             <div id="wall-content">
-                            {include file='modules/m.perfil_muro_story.tpl'}                         
+                            <?    
+                                include 'm.perfil_muro_story.php';
+                            ?>
                             </div>
                             <!-- more -->
-                            {if $tsMuro.total >= 10}
+                            <?
+                            if ($tsMuro['total'] >= 10)
+                            {
+                            ?>
                             <div class="more-pubs">
                                 <div class="content">
                                 <a href="#" onclick="muro.stream.loadMore('news'); return false;" class="a_blue">Publicaciones m&aacute;s antiguas</a>
                                 <span><img width="16" height="11" alt="" src="http://static.ak.fbcdn.net/rsrc.php/yb/r/GsNJNwuI-UM.gif"/></span>
                                 </div>
                             </div>
-                            {elseif $tsMuro.total == 0}
-                            <div class="emptyData">Hola <u>{$tsUser->nick}</u> que te parece si empiezas a seguir usuarios.</div>
-                            {/if}
+                            <?
+                            }
+                            elseif ($tsMuro['total'] == 0)
+                            {
+                            ?>
+                                <div class="emptyData">Hola <u><? echo $tsUser->nick; ?></u> que te parece si empiezas a seguir usuarios.</div>
+                            <? 
+                            }
+                            ?>
     		            </div>
                   </div>

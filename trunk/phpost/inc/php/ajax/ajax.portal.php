@@ -11,7 +11,7 @@
 
 \*********************************/
 
-	// NIVELES DE ACCESO Y PLANTILLAS DE CADA ACCIÓN
+	// NIVELES DE ACCESO Y PLANTILLAS DE CADA ACCIï¿½N
 	$files = array(
 		'portal-posts_config' => array('n' => 2, 'p' => ''),
         'portal-posts_pages' => array('n' => 2, 'p' => 'posts'),
@@ -54,8 +54,11 @@
 			//<---
             $tsPosts = $tsPortal->getMyPosts();
             $smarty->assign("tsPosts",$tsPosts['data']);
+            $tsPosts=$tsPosts['data'];
             $smarty->assign("tsPages",$tsPosts['pages']);
+            $tsPages=$tsPosts['pages'];            
             $smarty->assign("tsType",'posts');
+            $tsType='posts';
 			//--->
 		break;
 		case 'portal-favs_pages':

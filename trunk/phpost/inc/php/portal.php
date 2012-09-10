@@ -59,8 +59,11 @@
 \*********************************/
 
     $smarty->assign("tsMuro",$tsPortal->getNews());
+    //$tsMuro=$tsPortal->getNews();
     $smarty->assign("tsInfo",array('uid' => $tsUser->uid));
+    $tsInfo=array('uid' => $tsUser->uid);
     $smarty->assign("tsType", "news");
+    $tsType="news";
     //
     $smarty->assign("tsCategories",$tsPortal->composeCategories());
     //$tsPosts = $tsPortal->getMyPosts();
@@ -71,7 +74,7 @@
     $smarty->assign("tsFavorites",$tsPortal->getFavorites());
     // FOTOS
     $tsImages = $tsPortal->getFotos();
-	$smarty->assign("tsImages",$tsImages);
+    $smarty->assign("tsImages",$tsImages);
     $smarty->assign("tsImTotal",count($tsImages));
     // STATS
     $smarty->assign("tsStats",$tsPortal->getStats());

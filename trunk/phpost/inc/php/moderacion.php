@@ -68,6 +68,7 @@
         // SEGUNDA ACCION
 		if(empty($act)){
 		  $smarty->assign("tsReports",$tsMod->getDenuncias($action));
+                  $tsReports=$tsMod->getDenuncias($action);
           $smarty->assign("tsDenuncias",$tsDenuncias[$action]);
 		}elseif($act == 'info'){
           $smarty->assign("tsDenuncia",$tsMod->getDenuncia($action));
@@ -119,8 +120,10 @@
 \*********************************/
 	// ACCION?
 	$smarty->assign("tsAction",$action);
+        $tsAction=$action;
 	//
 	$smarty->assign("tsAct",$act);
+        $tsAct=$act;
 	//
 	}
 

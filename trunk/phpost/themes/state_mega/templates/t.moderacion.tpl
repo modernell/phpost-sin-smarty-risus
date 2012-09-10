@@ -30,7 +30,9 @@
                                 {elseif $tsAction == 'users'}
                             	{include file='admin_mods/m.mod_report_users.tpl'}
                                 {elseif $tsAction == 'banusers'}
-                                {if $tsUser->is_admod || $tsUser->permisos.movub}{include file='admin_mods/m.mod_ban_users.tpl'}{/if}
+                                {if $tsUser->is_admod || $tsUser->permisos.movub}
+                                {include file='admin_mods/m.mod_ban_users.tpl'}
+                                {/if}
 								{elseif $tsAction == 'pospelera'}
                                 {if $tsUser->is_admod || $tsUser->permisos.morp}{include file='admin_mods/m.mod_papelera_posts.tpl'}{/if}
 								{elseif $tsAction == 'fopelera'}
