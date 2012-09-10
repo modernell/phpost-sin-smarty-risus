@@ -31,23 +31,35 @@
                                 elseif ($tsAction == 'users')
                             	include 'admin_mods/m.mod_report_users.php';
                                 elseif ($tsAction == 'banusers')
-                                if ($tsUser->is_admod || $tsUser->permisos['movub'])
-                                include 'admin_mods/m.mod_ban_users.php';
+                                {    
+                                    if ($tsUser->is_admod || $tsUser->permisos['movub'])
+                                    include 'admin_mods/m.mod_ban_users.php';
+                                }
 				elseif ($tsAction == 'pospelera')
+                                {    
                                 if ($tsUser->is_admod || $tsUser->permisos['morp'])
                                 include 'admin_mods/m.mod_papelera_posts.php';
+                                }
 				elseif ($tsAction == 'fopelera')
+                                {    
                                 if ($tsUser->is_admod || $tsUser->permisos['morf'])
                                 include 'admin_mods/m.mod_papelera_fotos.php';//if
+                                }
 				elseif ($tsAction == 'buscador')
+                                {    
                                 if ($tsUser->is_admod || $tsUser->permisos['moub'])
                                 include 'admin_mods/m.mod_buscador.php';//if
+                                }
 				elseif ($tsAction == 'comentarios')
+                                {    
                                 if ($tsUser->is_admod || $tsUser->permisos['mocc'])
                                 include 'admin_mods/m.mod_revision_comentarios.php';//if
+                                }
 				elseif ($tsAction == 'revposts')
+                                {    
                                 if ($tsUser->is_admod || $tsUser->permisos['mocp'])
                                 include 'admin_mods/m.mod_revision_posts.php';                                
+                                }
                                 ?>
                             </div>
                         </div>

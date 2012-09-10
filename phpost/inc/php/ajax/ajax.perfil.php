@@ -15,7 +15,7 @@
 	$files = array(
         'perfil-wall' => array('n' => 0, 'p' => 'wall'),
         'perfil-actividad' => array('n' => 0, 'p' => 'actividad'),
-		'perfil-info' => array('n' => 0, 'p' => 'info'),
+	'perfil-info' => array('n' => 0, 'p' => 'info'),
         'perfil-posts' => array('n' => 0, 'p' => 'posts'),
         'perfil-seguidores' => array('n' => 0, 'p' => 'follows'),
         'perfil-siguiendo' => array('n' => 0, 'p' => 'follows'),
@@ -81,6 +81,7 @@
                 $actividad = $tsActividad->getActividad($user_id, $ac_type, $start);
                 $smarty->assign("tsActividad",$actividad);
                 $tsActividad=$actividad;
+                $tsActividad=$actividad;
                 $smarty->assign("tsDo",$ac_do);
                 $tsDo=$ac_do;
                 $smarty->assign("tsUserID",$user_id);
@@ -91,12 +92,12 @@
             }
             //--->
         break;
-		case 'perfil-info':
+            case 'perfil-info':
 			//<---
             include('../ext/datos.php');
     		// PERFIL INFO
             $tsPerfil = $tsCuenta->loadPerfil($user_id);
-    		$smarty->assign("tsPerfil",$tsPerfil);
+            $smarty->assign("tsPerfil",$tsPerfil);
             // PAIS
             $smarty->assign("tsPais",$tsPaises[$tsPerfil['user_pais']]);
             $tsPais=$tsPaises[$tsPerfil['user_pais']];
@@ -123,18 +124,25 @@
             $smarty->assign("tsType",'seguidores');
             $smarty->assign("tsHide",$_GET['hide']); // MOSTRAR DIVS
             $smarty->assign("tsData",$tsMonitor->getFollows('seguidores', $user_id));
+            $tsType='siguidores';            
+            $tsHide=$_GET['hide'];            
+            $tsData=$tsMonitor->getFollows('siguidores', $user_id);
             //--->
         break;
         case 'perfil-siguiendo':
             //<---
             $smarty->assign("tsType",'siguiendo');
+            $tsType='siguiendo';
             $smarty->assign("tsHide",$_GET['hide']); // MOSTRAR DIVS
+            $tsHide=$_GET['hide'];
             $smarty->assign("tsData",$tsMonitor->getFollows('siguiendo', $user_id));
+            $tsData=$tsMonitor->getFollows('siguiendo', $user_id);
             //--->
         break;
         case 'perfil-medallas':
             //<---
             $smarty->assign("tsMedallas",$tsCuenta->loadMedallas($user_id));
+            $tsMedallas=$tsCuenta->loadMedallas($user_id);
             //--->
         break;
         default:
