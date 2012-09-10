@@ -11,7 +11,7 @@
 
 \*********************************/
 
-	// NIVELES DE ACCESO Y PLANTILLAS DE CADA ACCIÓN
+	// NIVELES DE ACCESO Y PLANTILLAS DE CADA ACCIï¿½N
 	$files = array(
 		'moderacion-posts' => array('n' => 3, 'p' => 'main'),
 		'moderacion-fotos' => array('n' => 3, 'p' => 'main'),
@@ -122,13 +122,14 @@
 						//echo $tsMod->InfoUser($_POST['user_id']);
 						echo $smarty->assign("tsIUser", $tsMod->InfoUser($_POST['user_id']));
                     break;
-					case 'editar':
+			case 'editar':
                         $tsAjax = 1;
                         echo $tsMod->EditarUser($_POST['user_id']);
                     break;
                 }
                 // HACER
                 $smarty->assign("tsDo",$do);
+                $tsDo=$do;
 			//-->
 		break;
 		case 'moderacion-mps':
