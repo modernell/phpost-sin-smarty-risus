@@ -1,28 +1,95 @@
-				{if $tsFoto.f_status != 0 || $tsFoto.user_activo == 0}
-                    <div class="emptyData">Esta foto no es visible{if $tsFoto.f_status == 1} por acumulaci&oacute;n de denuncias u orden administrativa{elseif $tsFoto.f_status == 2} porque est&aacute; eliminada{elseif $tsFoto.user_activo != 1} porque la cuenta del due&ntilde;o se encuentra desactivada{/if}, pero puedes verla porque eres {if $tsUser->is_admod == 1}administrador{elseif $tsUser->is_admod == 2}moderador{else}autorizado{/if}.</div><br />
-				{/if}
+            <?	
+            if ($tsFoto['f_status'] != 0 || $tsFoto['user_activo'] == 0)
+            {
+            ?>
+                    <div class="emptyData">
+                        Esta foto no es visible
+                        <?
+                        if ($tsFoto['f_status'] == 1) 
+                        {
+                        ?>
+                        por acumulaci&oacute;n de denuncias u orden administrativa
+                        <?
+                        }
+                        elseif ($tsFoto['f_status'] == 2)
+                        {
+                        ?>        
+                        porque est&aacute; eliminada
+                        <?
+                        }
+                        elseif ($tsFoto['user_activo'] != 1) 
+                        {
+                        ?>
+                        porque la cuenta del due&ntilde;o se encuentra desactivada
+                        <?
+                        }
+                        ?>
+                        , pero puedes verla porque eres 
+                        <?
+                        if ($tsUser->is_admod == 1)
+                        {
+                        ?>
+                        administrador
+                        <?
+                        }
+                        elseif ($tsUser->is_admod == 2)
+                        {
+                        ?>
+                        moderador
+                        <?
+                        }
+                        else
+                        {
+                        ?>                        
+                        autorizado
+                        <?
+                        }
+                        ?>
+                        .</div><br />
+		<?
+                }
+                ?>
                 <div id="fg_centro" style="width: 600px; float: left; margin:0 10px">
                 <div class="foto">
                     <div class="v_user">
                         <div class="avatar-box">
-                            <a href="{$tsConfig.url}/perfil/{$tsFoto.user_name}"><img src="{$tsConfig.url}/files/avatar/{$tsFoto.f_user}_50.jpg"/></a>
+                            <a href="<? echo $tsConfig['url']; ?>/perfil/<? echo $tsFoto['user_name']; ?>">
+                                <img src="<? echo $tsConfig['url']; ?>/files/avatar/<? echo $tsFoto['f_user']; ?>_50.jpg"/>
+                            </a>
                         </div>
                         <div class="v_info">
-                            <a href="{$tsConfig.url}/perfil/{$tsFoto.user_name}" class="user">{$tsFoto.user_name}</a>
+                            <a href="<? echo $tsConfig['url']; ?>/perfil/<? echo $tsFoto['user_name']; ?>" class="user"><? echo $tsFoto['user_name']; ?></a>
                             <div class="links">
-                                <span style="background-image:url({$tsConfig.default}/images/icons/ran/{$tsFoto.r_image});color:#{$tsFoto.r_color}"><strong>{$tsFoto.r_name}</strong></span>
-                                <span style="background-image:url({$tsConfig.default}/images/flags/{$tsFoto.user_pais.0|lower}.png);">{$tsFoto.user_pais.1}</span>
-                                <span style="background-image:url({$tsConfig.default}/images/icons/{if $tsFoto.user_sexo == 0}fe{/if}male.png);">{if $tsFoto.user_sexo == 1}Hombre{else}Mujer{/if}</span>
-                                {if $tsUser->is_member && $tsUser->uid != $tsFoto.f_user}<span style="background-image:url({$tsConfig.default}/images/icon-mensajes-recibidos.gif);"><a href="#" onclick="mensaje.nuevo('{$tsFoto.user_name}','','',''); return false;">Enviar Mensaje</a></span>{/if}
+                                <span style="background-image:url(<? echo $tsConfig['default']; ?>/images/icons/ran/<? echo $tsFoto['r_image']; ?>);color:#{$tsFoto.r_color}"><strong><? echo $tsFoto['r_name']; ?></strong></span>
+                                <span style="background-image:url(<? echo $tsConfig['default']; ?>/images/flags/<? echo $tsFoto['user_pais'][0]; ?>.png);"><? echo $tsFoto['user_pais'][1];?></span>
+                                <span style="background-image:url(<? echo $tsConfig['default']; ?>/images/icons/{if $tsFoto.user_sexo == 0}fe{/if}male.png);"><? if ($tsFoto['user_sexo'] == 1) echo 'Hombre'; else echo 'Mujer'; ?></span>
+                                <?
+                                if ($tsUser->is_member && $tsUser->uid != $tsFoto['f_user'])
+                                {
+                                ?>
+                                <span style="background-image:url(<? echo $tsConfig['default']; ?>/images/icon-mensajes-recibidos.gif);">
+                                    <a href="#" onclick="mensaje.nuevo('<? echo $tsFoto[user_name]; ?>','','',''); return false;">Enviar Mensaje</a></span>
+                                <?
+                                }
+                                ?>
                             </div>
-                            {if $tsUser->uid != $tsFoto.f_user && $tsUser->is_member}
+                            <?
+                            if ($tsUser->uid != $tsFoto['f_user'] && $tsUser->is_member)
+                            {
+                            ?>
                             <div class="v_follow">
-                                <a class="btn_g unfollow_user_post" onclick="notifica.unfollow('user', {$tsFoto.f_user}, notifica.userInPostHandle, $(this).children('span'))" {if $tsFoto.follow == 0}style="display: none;"{/if}><span class="icons unfollow">Dejar de seguir</span></a>
-                                <a class="btn_g follow_user_post" onclick="notifica.follow('user', {$tsFoto.f_user}, notifica.userInPostHandle, $(this).children('span'))" {if $tsFoto.follow == 1}style="display: none;"{/if}><span class="icons follow">Seguir Usuario</span></a>
-                                                            
-								<br /><a onclick="denuncia.nueva('foto',{$tsFoto.foto_id}, '{$tsFoto.f_title}', '{$tsFoto.user_name}'); return false;" class="btn_g" style="width:105px;"><span class="icons denunciar_post">Denunciar</span></a>
-						    </div>
-                            {/if}
+                                <a class="btn_g unfollow_user_post" onclick="notifica.unfollow('user',<? echo $tsFoto['f_user']; ?>, notifica.userInPostHandle, $(this).children('span'))" <? if ($tsFoto['follow'] == 0) echo 'style="display: none;"'; ?>>
+                                   <span class="icons unfollow">Dejar de seguir</span></a>
+                                <a class="btn_g follow_user_post" onclick="notifica.follow('user', <? echo $tsFoto['f_user']; ?>, notifica.userInPostHandle, $(this).children('span'))" <? if ($tsFoto['follow'] == 1) echo 'style="display: none;"'; ?>>
+                                   <span class="icons follow">Seguir Usuario</span></a>                                                            
+				<br />
+                                <a onclick="denuncia.nueva('foto',<? echo $tsFoto[foto_id]; ?>, '<? echo $tsFoto[f_title];?>', '<? echo $tsFoto[user_name]; ?>'); return false;" class="btn_g" style="width:105px;">
+                                   <span class="icons denunciar_post">Denunciar</span>
+                                </a>
+                            </div>
+                            <?
+                            }
+                            ?>
                         </div>
                         <div class="clearBoth"></div>
                     </div>
@@ -30,18 +97,20 @@
                     <div id="imagen">
                         {if $tsFoto.f_user == $tsUser->uid || $tsUser->is_admod || $tsUser->permisos.moef || $tsUser->permisos.moedfo}
                         <div class="tools">
-                        {if $tsFoto.f_status != 2 && ($tsUser->is_admod || $tsUser->permisos.moef || $tsFoto.f_user == $tsUser->uid)}<a href="#" onclick="{if $tsUser->uid == $tsFoto.f_user}fotos.borrar({$tsFoto.foto_id}, 'foto'); {else}mod.fotos.borrar({$tsFoto.foto_id}, 'foto');  {/if}return false;">
+                        {if $tsFoto.f_status != 2 && ($tsUser->is_admod || $tsUser->permisos.moef || $tsFoto.f_user == $tsUser->uid)}
+                        <a href="#" onclick="{if $tsUser->uid == $tsFoto.f_user}fotos.borrar({$tsFoto.foto_id}, 'foto'); {else}mod.fotos.borrar({$tsFoto.foto_id}, 'foto');  {/if}return false;">
 						  <img alt="Borrar" src="{$tsConfig.default}/images/borrar.png"/> Borrar</a>{/if}
-                        {if $tsUser->is_admod || $tsUser->permisos.moedfo || $tsFoto.f_user == $tsUser->uid}<a href="#" onclick="location.href='{$tsConfig.url}/fotos/editar.php?id={$tsFoto.foto_id}'; return false">
+                        {if $tsUser->is_admod || $tsUser->permisos.moedfo || $tsFoto.f_user == $tsUser->uid}
+                        <a href="#" onclick="location.href='{$tsConfig.url}/fotos/editar.php?id={$tsFoto.foto_id}'; return false">
 						  <img alt="Editar" src="{$tsConfig.default}/images/editar.png"/> Editar</a>{/if}
                         </div>
                         {/if}
-                        <img class="img" src="{$tsFoto.f_url}" />
+                        <img class="img" src="<? echo $tsFoto['f_url']; ?>" />
                     </div>
-                    <h2 class="floatL">{$tsFoto.f_title}</h2>
+                    <h2 class="floatL"><? echo $tsFoto['f_title']; ?></h2>
                     <span class="floatR"><b>{$tsFoto.f_date|date_format:"%d/%m/%Y"}</b></span>
                     <div class="clearBoth"></div>
-                    <p style="word-wrap: break-word;">{$tsFoto.f_description|nl2br}</p>
+                    <p style="word-wrap: break-word;"><? echo nl2br($tsFoto['f_description']); ?></p>
                     <span class="spacer"></span>
                     <div class="infoPost">
                   		<div style="width:12%" class="rateBox">
@@ -53,23 +122,29 @@
                   		</div><!-- END RateBox -->
                         <div style="width:12%" class="rateBox">
                   			<strong class="title">Positivos:</strong>
-                            <span class="color_green" id="votos_total_pos">{$tsFoto.f_votos_pos}</span>
+                            <span class="color_green" id="votos_total_pos"><? echo $tsFoto['f_votos_pos']; ?></span>
                   		</div><!-- END RateBox -->
                         <div style="width:12%" class="rateBox">
                   			<strong class="title">Negativos:</strong>
-                            <span class="color_red" id="votos_total_neg">{$tsFoto.f_votos_neg}</span>
+                            <span class="color_red" id="votos_total_neg"><? echo $tsFoto['f_votos_neg']; ?></span>
                   		</div><!-- END RateBox -->
                   		<div style="width: 10%" class="metaBox">
             	    		<strong class="title">Visitas:</strong>
-                  			<span style="font-size:11px">{$tsFoto.f_hits}</span>
+                  			<span style="font-size:11px"><? echo $tsFoto['f_hits']; ?></span>
                  		</div><!-- END Visitas -->												
-						{if $tsUser->is_admod}						
+                                                <?
+						if ($tsUser->is_admod)						
+                                                {
+                                                ?>
 						<div style="width: 12%" class="metaBox">                 			
 						<strong class="title">IP</strong>                 			
-						<span style="font-size:11px"><a href="{$tsConfig.url}/moderacion/buscador/1/1/{$tsFoto.f_ip}" class="geoip" target="_blank">{$tsFoto.f_ip}</a></span>                       
+						<span style="font-size:11px">
+                                                    <a href="<? echo $tsConfig['url']; ?>/moderacion/buscador/1/1/<? echo $tsFoto['f_ip']; ?>" class="geoip" target="_blank"><? echo $tsFoto['f_ip']; ?></a></span>                       
 						</div>
 						<!-- END Visitas -->						
-						{/if}					
+						<?
+                                                }
+                                                ?>
 
                   		<div class="clearBoth"></div>
  	                </div>
@@ -77,11 +152,11 @@
                 <div class="bajo" style="margin-top:5px">
                     <div class="comments">
                         <div class="comentarios-title">
-                            <a href="{$tsConfig.url}/rss/comentarios.php?id={$tsFoto.foto_id}&type=fotos">
+                            <a href="<? echo $tsConfig['url']; ?>/rss/comentarios.php?id=<? echo $tsFoto['foto_id']; ?>&type=fotos">
                                 <span class="floatL systemicons sRss" style="position: relative; z-index: 87; margin-right: 5px;"></span>
                             </a>
-                            <h4 class="titulorespuestas floatL"><span id="ncomments">{$tsFoto.f_comments}</span> Comentarios</h4>
-				           <div class="clearfix"></div>
+                            <h4 class="titulorespuestas floatL"><span id="ncomments"><? echo $tsFoto['f_comments']; ?></span> Comentarios</h4>
+                            <div class="clearfix"></div>
                            <hr />
                         </div>
                         <div id="mensajes">
@@ -94,7 +169,7 @@
                                 <div class="firma">
                                     <div class="options">
                                         {if $tsFoto.f_user == $tsUser->info.user_id || $tsUser->is_admod || $tsUser->permisos.moecf}
-                                        <a href="#" onclick="fotos.borrar({$c.cid}, 'com'); return false" class="floatR" style="margin:8px 5px">
+                                        <a href="#" onclick="fotos.borrar(<? echo $c['cid']; ?>, 'com'); return false" class="floatR" style="margin:8px 5px">
                             			  <img title="Borrar Comentario" alt="borrar" src="{$tsConfig.default}/images/borrar.png"/>
                                         </a>
                                         {/if}
@@ -127,7 +202,7 @@
                         {elseif $tsUser->is_member}
                         <div class="form">
                             <div class="avatar-box">
-                                <img src="{$tsConfig.url}/files/avatar/{$tsUser->uid}_50.jpg" width="50" height="50"/>
+                                <img src="<? echo $tsConfig['url']; ?>/files/avatar/{$tsUser->uid}_50.jpg" width="50" height="50"/>
                             </div>
                             <form method="post" action="" name="firmar">
                                 <label for="mensaje" style="font-size:12px"><b>Mensaje</b></label>
