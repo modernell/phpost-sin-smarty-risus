@@ -7,7 +7,7 @@
                             <li><a href="{$tsConfig.url}/fotos/{$f.user_name}/{$f.foto_id}/{$f.f_title|seo}.html"><img src="{$f.f_url}" title="{$f.f_title}" width="120" height="90" /></a><br /><a href="{$tsConfig.url}/perfil/{$f.user_name}" style="text-decoration:underline;"><strong>{$f.user_name}</strong></a></li>
                             {/foreach}
                             {else}
-                            <li class="emptyData"><u>{$tsFoto.user_name}</u> no sigue usuarios o no han subido fotos.</li>
+                            <li class="emptyData"><u><? echo $tsFoto['user_name'];?></u> no sigue usuarios o no han subido fotos.</li>
                             {/if}
                         </ul>
                         {if $tsFFotos}<a href="{$tsConfig.url}/fotos/{$tsFoto.user_name}" class="fb_foot">Ver todas</a>{/if}

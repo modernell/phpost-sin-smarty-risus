@@ -39,7 +39,7 @@
         {	
 		$tsPage = 'aviso';
 		$tsAjax = 0;
-		$smarty->assign("tsAviso",$tsLevelMsg);
+		$smarty->assign("tsAviso",$tsLevelMsg);                
                 $tsAviso=$tsLevelMsg;
 		//
 		$tsContinue = false;
@@ -121,14 +121,23 @@
 			}elseif($tsFoto['foto']['exist'] == 0){
             $tsPage = 'aviso';
 			$smarty->assign("tsAviso",array('titulo' => 'Opps...', 'mensaje' => 'Esta foto no existe', 'but' => 'Ir a Fotos', 'link' => "{$tsCore->settings['url']}/fotos/"));
-			}else{
+			}
+                        else
+                            {
 			$smarty->assign("tsFoto", $tsFoto['foto']);
-            $smarty->assign("tsUFotos", $tsFoto['last']);
-            $smarty->assign("tsFFotos", $tsFoto['amigos']);
-            $smarty->assign("tsFComments", $tsFoto['comments']);
+                        $tsFoto=$tsFoto['foto'];
+                        $smarty->assign("tsUFotos", $tsFoto['last']);
+                        $tsUFotos=$tsFoto['last'];
+                        $smarty->assign("tsFFotos", $tsFoto['amigos']);
+                        $tsFFotos=$tsFoto['amigos'];
+                        $smarty->assign("tsFComments", $tsFoto['comments']);
+                        $tsFComments=$tsFoto['comments'];
 			$smarty->assign("tsFVisitas", $tsFoto['visitas']);
+                        $tsFVisitas=$tsFoto['visitas'];
 			$smarty->assign("tsFMedallas", $tsFoto['medallas']);
+                        $tsFMedallas=$tsFoto['medallas'];
 			$smarty->assign("tsTMedallas", $tsFoto['m_total']);
+                        $tsTMedallas=$tsFoto['m_total'];
 			}
 		break;
         case 'album':
@@ -140,7 +149,9 @@
             } else {
                 $tsFotox = $tsFotos->getFotos($user_id);
                 $smarty->assign("tsFotos", $tsFotox);
+                $tsFotos=$tsFotox;
                 $smarty->assign("tsFUser", array($user_id, $username));
+               $tsFUser=array($user_id, $username);
             }
 
         break;
