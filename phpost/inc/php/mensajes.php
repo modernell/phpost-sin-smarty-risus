@@ -34,6 +34,7 @@
 		$tsPage = 'aviso';
 		$tsAjax = 0;
 		$smarty->assign("tsAviso",$tsLevelMsg);
+                $tsAviso=$tsLevelMsg;
 		//
 		$tsContinue = false;
 	}
@@ -58,25 +59,32 @@
     switch($action){
         case '':
             $smarty->assign("tsMensajes",$tsMP->getMensajes(2, $unread));
+            $tsMensajes=$tsMP->getMensajes(2, $unread);
         break;
         case 'enviados':
             $smarty->assign("tsMensajes",$tsMP->getMensajes(3));
+            $tsMensajes=$tsMP->getMensajes(3);
         break;
         case 'respondidos':
             $smarty->assign("tsMensajes",$tsMP->getMensajes(4));
+            $tsMensajes=$tsMP->getMensajes(4);
         break;
 		case 'search':
             $smarty->assign("tsMensajes",$tsMP->getMensajes(5));
+                    $tsMensajes=$tsMP->getMensajes(5);
         break;
         case 'leer':
             $smarty->assign("tsMensajes",$tsMP->readMensaje());
+            $tsMensajes=$tsMP->readMensaje();
         break;
         case 'avisos':
             // ESTO ES COSA DEL MONITOR PERO LO PUSE EN MENSAJES PORQUE LOS AVISOS SON ESO, MENSAJES :)
             if(empty($_GET['aid']) && empty($_GET['did'])){
                 $smarty->assign("tsMensajes",$tsMonitor->getAvisos());
+                $tsMensajes=$tsMonitor->getAvisos();
             } elseif($_GET['aid']) {
                 $smarty->assign("tsMensaje",$tsMonitor->readAviso($_GET['aid']));
+                $tsMensaje=$tsMonitor->readAviso($_GET['aid']);
             } elseif($_GET['did']){
                 $borrado = $tsMonitor->delAviso($_GET['did']);
                 if($borrado == true) $tsCore->redirectTo($tsCore->settings['url'].'/mensajes/avisos/');
@@ -85,6 +93,7 @@
     }
     # VARIABLE
     $smarty->assign("tsQT", $_GET['qt']);
+    $tsQT=$_GET['qt'];
     
 
 /**********************************\
@@ -94,10 +103,12 @@
 \*********************************/
 	//
 	$smarty->assign("tsAction",$action);
+        $tsAction=$action;
 	
 	}
 
-if(empty($tsAjax)) {	// SI LA PETICION SE HIZO POR AJAX DETENER EL SCRIPT Y NO MOSTRAR PLANTILLA, SI NO ENTONCES MOSTRARLA.
+if(empty($tsAjax))
+{	// SI LA PETICION SE HIZO POR AJAX DETENER EL SCRIPT Y NO MOSTRAR PLANTILLA, SI NO ENTONCES MOSTRARLA.
 
 	$smarty->assign("tsTitle",$tsTitle);	// AGREGAR EL TITULO DE LA PAGINA ACTUAL
 

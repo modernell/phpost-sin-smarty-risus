@@ -13,7 +13,7 @@ if ($tsMensajes['data'])
                     <? echo $mp['mp_preview']; ?>
                 </div>
                 <div class="time">
-                    <span class="autor"><? echo $mp['user_name']; ?></span> | <? echo modifier_hace($mp['mp_date']); ?>|fecha}
+                    <span class="autor"><? echo $mp['user_name']; ?></span> | <? echo date_formatter($mp['mp_date']); ?>
                 </div>
             </div>
         </a>

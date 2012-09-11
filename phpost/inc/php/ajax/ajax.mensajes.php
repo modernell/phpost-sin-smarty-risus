@@ -11,7 +11,7 @@
 
 \*********************************/
 
-	// NIVELES DE ACCESO Y PLANTILLAS DE CADA ACCIÓN
+	// NIVELES DE ACCESO Y PLANTILLAS DE CADA ACCIï¿½N
 	$files = array(
 		'mensajes-validar' => array('n' => 2, 'p' => ''),
         'mensajes-enviar' => array('n' => 2, 'p' => ''),
@@ -55,11 +55,13 @@
         case 'mensajes-respuesta':
 			// <!--
             $smarty->assign("mp",$tsMP->newRespuesta());
+            $mp=$tsMP->newRespuesta();
             // -->
 		break;
         case 'mensajes-lista':
 			// <!--
             $smarty->assign("tsMensajes",$tsMP->getMensajes());
+            $tsMensajes=$tsMP->getMensajes();
             // -->
 		break;
         case 'mensajes-editar':
