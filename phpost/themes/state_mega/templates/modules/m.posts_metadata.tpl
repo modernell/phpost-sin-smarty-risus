@@ -15,7 +15,7 @@
                                 {section name=puntos start=1 loop=$tsUser->info.user_puntosxdar+1 max=$tsPunteador.rango}
                                 <a href="#" onclick="votar_post({$smarty.section.puntos.index}); return false;">{$smarty.section.puntos.index}</a> {if $smarty.section.puntos.index < $tsPunteador.rango}-{/if}
                                 {/section}
-								{/if}
+                                                        {/if}
                                  (de {$tsUser->info.user_puntosxdar} Disponibles)
                             </div>
                             <hr class="divider"/>

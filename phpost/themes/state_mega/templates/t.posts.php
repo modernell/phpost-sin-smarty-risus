@@ -53,7 +53,7 @@
                     <div class="floatR" style="width: 766px;">
                     <?     
                     	include 'modules/m.posts_related.php';
-                        //include 'modules/m.posts_banner.tpl';
+                        include 'modules/m.posts_banner.php';
                     ?>
                         <div class="clearfix"></div>
                     </div>

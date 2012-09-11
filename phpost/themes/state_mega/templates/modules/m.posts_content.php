@@ -148,5 +148,7 @@
 							</div>                            
 							{include file='modules/m.global_ads_728.tpl'}                        
 						</div>	                    
-						{include file='modules/m.posts_metadata.tpl'}                    
+						<?
+                                                include 'm.posts_metadata.php';
+                                                ?>
 					</div>
