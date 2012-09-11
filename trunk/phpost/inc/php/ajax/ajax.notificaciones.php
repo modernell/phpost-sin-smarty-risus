@@ -11,7 +11,7 @@
 
 \*********************************/
 
-	// NIVELES DE ACCESO Y PLANTILLAS DE CADA ACCIÓN
+	// NIVELES DE ACCESO Y PLANTILLAS DE CADA ACCIoN
 	$files = array(
 		'notificaciones-ajax' => array('n' => 2, 'p' => 'ajax'),
         'notificaciones-filtro' => array('n' => 2, 'p' => ''),
@@ -50,6 +50,7 @@
 					$tsAjax = 0; // AJAX
 					$notificaciones = $tsMonitor->getNotificaciones();
 					$smarty->assign("tsData",$notificaciones['data']);
+                                        $tsData=$notificaciones['data'];
 					// -->
 				break;
 				case 'follow':
