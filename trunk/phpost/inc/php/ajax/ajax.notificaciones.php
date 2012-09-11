@@ -13,7 +13,7 @@
 
 	// NIVELES DE ACCESO Y PLANTILLAS DE CADA ACCIoN
 	$files = array(
-		'notificaciones-ajax' => array('n' => 2, 'p' => 'ajax'),
+	'notificaciones-ajax' => array('n' => 2, 'p' => 'ajax'),
         'notificaciones-filtro' => array('n' => 2, 'p' => ''),
 	);
 
@@ -73,8 +73,7 @@
         case 'notificaciones-filtro':
             echo $tsMonitor->setFiltro();
         break;
-	}
-	
+	}	
 	// HACK xD
 	$_GET['ts'] = true;
 ?>
