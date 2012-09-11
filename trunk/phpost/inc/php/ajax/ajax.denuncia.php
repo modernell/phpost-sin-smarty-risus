@@ -11,7 +11,7 @@
 
 \*********************************/
 
-	// NIVELES DE ACCESO Y PLANTILLAS DE CADA ACCIÓN
+	// NIVELES DE ACCESO Y PLANTILLAS DE CADA ACCIï¿½N
 	$files = array(
 		'denuncia-post' => array('n' => 2, 'p' => 'form'),
 		'denuncia-foto' => array('n' => 2, 'p' => 'form'),
@@ -45,16 +45,20 @@
     // VARS
     $obj_id = $tsCore->setSecure($_POST['obj_id']);
 	// CODIGO
-	switch($action){
+	switch($action)
+    {
 		case 'denuncia-post':   
         	// CREAR DENUNCIA
             if($_POST['razon']){
                 $tsAjax = 1;
                 echo $tsSwat->setDenuncia($obj_id);
             // FORMULARIO DE DENUNCIA
-            } else {
+            } 
+            else 
+             {
                 // VARS
-                $tsData = array(
+                $tsData = array
+                (
                     'obj_id' => $obj_id,
                     'obj_title' => $tsCore->setSecure($_POST['obj_title']),
                     'obj_user' => $tsCore->setSecure($_POST['obj_user']), 
@@ -62,7 +66,9 @@
     			// DATOS
                 include("../ext/datos.php");
     			$smarty->assign("tsData",$tsData);
+                        $tsData=$tsData;
     			$smarty->assign("tsDenuncias",$tsDenuncias['posts']);
+                        $tsDenuncias=$tsDenuncias['posts'];
             }
 		break;
 		case 'denuncia-foto':   
@@ -97,10 +103,13 @@
             }
 			// DATOS
             include("../ext/datos.php");
-            $smarty->assign("tsData",array('nick' => $_POST['obj_user']));
+                $smarty->assign("tsData",array('nick' => $_POST['obj_user']));
+                $tsData=array('nick' => $_POST['obj_user']);
     		$smarty->assign("tsDenuncias",$tsDenuncias['users']);
+                $tsDenuncias=$tsDenuncias['users'];
         break;
 	}
     // ACCION
     $smarty->assign("tsAction",$action);
+    $tsAction=$action;
 ?>

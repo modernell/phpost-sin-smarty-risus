@@ -79,7 +79,7 @@
                         $tsAjax = 1;
                         echo $tsMod->setSticky($_POST['id']);
                     break;
-					case 'openclosed':
+			case 'openclosed':
                         $tsAjax = 1;
                         echo $tsMod->setOpenClosed($_POST['id']);
                     break;
