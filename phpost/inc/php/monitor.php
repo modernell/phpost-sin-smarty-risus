@@ -34,6 +34,7 @@
 		$tsPage = 'aviso';
 		$tsAjax = 0;
 		$smarty->assign("tsAviso",$tsLevelMsg);
+                $tsAviso=$tsLevelMsg;
 		//
 		$tsContinue = false;
 	}
