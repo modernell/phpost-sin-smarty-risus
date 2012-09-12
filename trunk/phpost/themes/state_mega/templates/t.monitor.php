@@ -10,7 +10,7 @@ include 'sections/main_header.php';
                 {    
 	            include 'modules/m.monitor_menu.php';
                     include 'modules/m.monitor_listado.php';
-                }
+                
 ?>
 <style>
 /* {literal} */
@@ -163,7 +163,9 @@ a.siguiente-listado, a.anterior-listado {
 *:first-child+html .clearfix { zoom: 1; } /* IE7 */
 /* {/literal} */
 </style>
-{/if}
+<?
+                }
+?>
 <div style="clear: both;"></div>
                 
 <?
