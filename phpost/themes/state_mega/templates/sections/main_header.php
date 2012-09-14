@@ -13,11 +13,12 @@ if ($tsUser->is_admod && $tsConfig['c_see_mod'] && $tsConfig['novemods']['total'
  ?>
 <!-- AGREGAMOS ESTILO DE MODERACIÓN SI HAY CONTENIDO PARA REVISAR -->
 <link href="<? echo $tsConfig['tema']['t_url']; ?>/css/moderacion.css" rel="stylesheet" type="text/css" />
-<div id="stickymsg" onmouseover="$('#brandday').css('opacity',0.5);" onmouseout="$('#brandday').css('opacity',1);" onclick="location.href = '{$tsConfig.url}/moderacion/'" style="cursor:default;">Hay {$tsConfig.novemods.total} contenido{if $tsConfig.novemods.total != 1}s{/if} esperando revisi&oacute;n</div>
+<div id="stickymsg" onmouseover="$('#brandday').css('opacity',0.5);" onmouseout="$('#brandday').css('opacity',1);" onclick="location.href = '<? echo $tsConfig[url];?>/moderacion/'" style="cursor:default;">
+    Hay <? echo $tsConfig['novemods']['total']; ?> contenido <? if ($tsConfig['novemods']['total'] != 1) echo 's'; ?> esperando revisi&oacute;n
+</div>
 <?
 }
 ?>
-
 <!-- AGREGAMOS UN ESTILO EXTRA SI EXISTE -->
 <link href="<? echo $tsConfig['css']; ?>/<? echo $tsPage; ?>.css" rel="stylesheet" type="text/css" />
 
@@ -28,7 +29,6 @@ if ($tsUser->is_admod && $tsConfig['c_see_mod'] && $tsConfig['novemods']['total'
 <script src="<? echo $tsConfig['js']; ?>/acciones.js" type="text/javascript"></script>
 <script src="<? echo $tsConfig['js']; ?>/funciones.js" type="text/javascript"></script>
 <?
-
 if ($tsUser->is_admod || $tsUser->permisos['moacp'] || $tsUser->permisos['most'] || $tsUser->permisos['moayca'] || $tsUser->permisos['mosu'] || $tsUser->permisos['modu'] || $tsUser->permisos['moep'] || $tsUser->permisos['moop'] || $tsUser->permisos['moedcopo'] || $tsUser->permisos['moaydcp'] || $tsUser->permisos['moecp'])
 {
 ?>
@@ -64,9 +64,9 @@ $(document).ready(function(){
 //     
     <?
     if ($tsNots > 0)
-    {echo "notifica.popup(".$tsNots.")"; }
+    echo "notifica.popup(".$tsNots.")"; 
     if ($tsMPs > 0 &&  $tsAction != 'leer')           
-        {echo "mensaje.popup(".$tsMPs.")";}
+    echo "mensaje.popup(".$tsMPs.")";
     ?>
         // 
 });

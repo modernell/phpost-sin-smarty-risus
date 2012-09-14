@@ -1,5 +1,5 @@
         <script type="text/javascript">
-            var menu_section_actual = '<? if ($tsDo == "posts")echo "posts"; else echo $tsPage; ?>';
+            var menu_section_actual = '<? if ($tsDo == "posts") echo "posts"; else echo $tsPage; ?>';
 	</script>
         <div id="menu_container">
         <div id="menu">
@@ -16,11 +16,13 @@
                 }
                 ?>
                 <li class="tabbed <? if($tsPage == 'posts' || $tsPage == 'home') echo 'here'; ?>" id="<? if ($tsConfig['c_allow_portal'] && $tsUser->is_member) echo 'tabbedposts'; else echo 'tabbedhome'; ?>">
-                    <a title="Ir a Posts" onclick="menu('posts', this.href); return false;" href="<? echo $tsConfig['url'].'/posts/'; ?>">Posts <img alt="Drop Down" src="<? echo $tsConfig['tema']['t_url']; ?>/images/nav.png"></a>
+                    <a title="Ir a Posts" onclick="menu('posts', this.href); return false;" href="<? echo $tsConfig['url'].'/posts/'; ?>">Posts 
+                        <img alt="Drop Down" src="<? echo $tsConfig['tema']['t_url']; ?>/images/nav.png"></a>
                 </li>				
 		<? if ($tsConfig['c_fotos_private'] == '1' && !$tsUser->is_member){} else { ?>
                 <li class="tabbed <? if($tsPage == 'fotos') echo 'here'; ?>" id="tabbedfotos">
-                    <a title="Ir a Fotos" onclick="menu('fotos', this.href); return false;" href="<? echo $tsConfig['url']; ?>/fotos/">Fotos <img alt="Drop Down" src="<? echo $tsConfig['tema']['t_url']; ?>/images/nav.png"></a>
+                    <a title="Ir a Fotos" onclick="menu('fotos', this.href); return false;" href="<? echo $tsConfig['url']; ?>/fotos/">Fotos 
+                        <img alt="Drop Down" src="<? echo $tsConfig['tema']['t_url']; ?>/images/nav.png"></a>
                 </li>								
 		<? 
                 }
